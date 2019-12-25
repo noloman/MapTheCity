@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_item_list.toolbar
 import kotlinx.android.synthetic.main.city_list_layout.item_list
@@ -20,6 +21,7 @@ class CityListActivity : AppCompatActivity() {
     private var twoPane: Boolean = false
     lateinit var adapter: CityListAdapter
     private val cityList = listOf<City>()
+    private lateinit var citiesListViewModel: CitiesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class CityListActivity : AppCompatActivity() {
             twoPane = true
         }
 
+        citiesListViewModel = ViewModelProviders.of(this).get(CitiesListViewModel::class.java)
         setupRecyclerView(item_list)
     }
 
