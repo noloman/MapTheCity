@@ -28,7 +28,7 @@ class CityListAdapter constructor(
                 // It's two pane - we load the fragment
                 val fragment = MapFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city)
+                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city.coordinates)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -39,7 +39,7 @@ class CityListAdapter constructor(
                 // it's NOT two pane so replace the current fragment by the MapFragment
                 val fragment = MapFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city)
+                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city.coordinates)
                     }
                 }
                 parentActivity.supportFragmentManager
