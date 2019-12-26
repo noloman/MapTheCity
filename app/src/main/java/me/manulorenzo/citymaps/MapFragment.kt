@@ -1,15 +1,13 @@
 package me.manulorenzo.citymaps
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import me.manulorenzo.citymaps.data.Coordinates
 
 class MapFragment : SupportMapFragment(), OnMapReadyCallback {
     companion object {
@@ -22,19 +20,15 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback {
         getMapAsync(this)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        viewGroup: ViewGroup?,
-        bundle: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, viewGroup, bundle)
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        arguments?.let {
+            val coordinates: Coordinates? = it.getParcelable(CITY_COORDINATES_KEY)
+            val latLng = coordinates?.lat?.let { it1 -> LatLng(it1, coordinates.lon) }
+            with(map) {
+                addMarker(latLng?.let { it1 -> MarkerOptions().position(it1) })
+                moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.0f))
+            }
+        }
     }
 }

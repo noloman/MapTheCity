@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_item_list.toolbar
 import kotlinx.android.synthetic.main.city_list_layout.item_list
 import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
 import me.manulorenzo.citymaps.data.City
-import me.manulorenzo.citymaps.entity.CityEntity
+
 
 class CityListActivity : AppCompatActivity() {
     /**
@@ -21,7 +21,6 @@ class CityListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
     lateinit var adapter: CityListAdapter
-    private val cityList = listOf<City>()
     private lateinit var citiesListViewModel: CitiesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +38,8 @@ class CityListActivity : AppCompatActivity() {
         }
 
         citiesListViewModel = ViewModelProviders.of(this).get(CitiesListViewModel::class.java)
-        citiesListViewModel.allCities.observe(this, Observer { cityEntityList: List<CityEntity> ->
-            adapter = CityListAdapter(this, cityEntityList.toCity(), twoPane)
+        citiesListViewModel.allCities.observe(this, Observer { cityList: List<City> ->
+            adapter = CityListAdapter(this, cityList, twoPane)
             item_list.adapter = adapter
         })
     }

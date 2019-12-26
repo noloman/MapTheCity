@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.city_list_row.view.coordinatesTextView
 import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
 import me.manulorenzo.citymaps.data.City
 
-class CityListAdapter(
+class CityListAdapter constructor(
     private val parentActivity: CityListActivity,
     private val cityList: List<City>,
     private val twoPane: Boolean
