@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.CoroutineScope
 import me.manulorenzo.citymaps.entity.CityDao
 import me.manulorenzo.citymaps.entity.CityEntity
 
@@ -17,7 +16,7 @@ abstract class CitiesDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: CitiesDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): CitiesDatabase {
+        fun getDatabase(context: Context): CitiesDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance

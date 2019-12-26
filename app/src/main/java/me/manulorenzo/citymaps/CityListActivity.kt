@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_item_list.toolbar
 import kotlinx.android.synthetic.main.city_list_layout.item_list
 import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
 import me.manulorenzo.citymaps.data.City
+import me.manulorenzo.citymaps.entity.CityEntity
 
 class CityListActivity : AppCompatActivity() {
     /**
@@ -38,7 +39,10 @@ class CityListActivity : AppCompatActivity() {
         }
 
         citiesListViewModel = ViewModelProviders.of(this).get(CitiesListViewModel::class.java)
-        setupRecyclerView(item_list)
+        citiesListViewModel.allCities.observe(this, Observer { cityEntityList: List<CityEntity> ->
+            adapter = CityListAdapter(this, cityEntityList.toCity(), twoPane)
+            item_list.adapter = adapter
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -66,10 +70,5 @@ class CityListActivity : AppCompatActivity() {
             }
         })
         return true
-    }
-
-    private fun setupRecyclerView(recyclerView: RecyclerView) {
-        adapter = CityListAdapter(this, cityList, twoPane)
-        recyclerView.adapter = adapter
     }
 }

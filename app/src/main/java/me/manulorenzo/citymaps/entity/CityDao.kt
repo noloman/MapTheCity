@@ -1,6 +1,5 @@
 package me.manulorenzo.citymaps.entity
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -8,8 +7,11 @@ import androidx.room.Query
 
 @Dao
 interface CityDao {
+    @Query("SELECT * FROM city ORDER BY id LIMIT 1")
+    fun fetchNumberRows(): Int
+
     @Query("SELECT * FROM city")
-    fun getAll(): LiveData<List<CityEntity>>
+    fun getAll(): List<CityEntity>
 
     @Query("SELECT * FROM city WHERE id IN (:ids)")
     fun loadAllByIds(ids: IntArray): List<CityEntity>
@@ -21,7 +23,7 @@ interface CityDao {
     fun findByName(name: String, country: String): CityEntity
 
     @Insert
-    fun insertAll(cities: List<CityEntity>)
+    suspend fun insertAll(vararg cities: CityEntity)
 
     @Delete
     fun delete(cityEntity: CityEntity)

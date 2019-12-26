@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "city")
 data class CityEntity(
-    @PrimaryKey var id: Int = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "country") val country: String,
-    @ColumnInfo(name = "coordinates") val coordinates: String
+    @PrimaryKey val id: Int,
+    @ColumnInfo val name: String,
+    @ColumnInfo val country: String,
+    @ColumnInfo(name = "coord") val coordinates: String
 )

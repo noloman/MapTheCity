@@ -18,7 +18,7 @@ class CityListAdapter(
     private val cityList: List<City>,
     private val twoPane: Boolean
 ) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>(), Filterable {
-    private var filteredCityList: List<City> = emptyList()
+    private var filteredCityList: List<City> = cityList
     private val onClickListener: View.OnClickListener
 
     init {
@@ -57,12 +57,12 @@ class CityListAdapter(
     }
 
     override fun onBindViewHolder(holderCity: CityViewHolder, position: Int) {
-        val city = cityList[position]
+        val city = filteredCityList[position]
         holderCity.cityName.text = city.name
         holderCity.cityCountryCode.text = city.country
         // TODO Improve
         holderCity.cityCoordinates.text =
-            city.coordinates.latitude.toString() + ", " + city.coordinates.longitude
+            city.coordinates.lat.toString() + ", " + city.coordinates.lon
 
         with(holderCity.itemView) {
             tag = city
@@ -70,7 +70,7 @@ class CityListAdapter(
         }
     }
 
-    override fun getItemCount() = cityList.size
+    override fun getItemCount() = filteredCityList.size
 
     inner class CityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cityName: TextView = view.cityNameTextView
@@ -84,12 +84,11 @@ class CityListAdapter(
             filteredCityList = if (charString.isEmpty()) {
                 cityList
             } else {
-                val filteredList: MutableList<City> = ArrayList()
+                val filteredList: MutableList<City> = arrayListOf()
                 for (row in cityList) {
-                    // TODO
-                    if (row.name.toLowerCase().contains(charString.toLowerCase()) || row.country.contains(
-                            charSequence
-                        )
+                    // TODO Improve
+                    if (row.name.toLowerCase().contains(charString.toLowerCase()) ||
+                        row.country.contains(charSequence)
                     ) {
                         filteredList.add(row)
                     }
