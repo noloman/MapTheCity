@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -15,7 +14,6 @@ import kotlinx.android.synthetic.main.city_list_layout.item_list
 import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
 import me.manulorenzo.citymaps.data.City
 
-
 class CityListActivity : AppCompatActivity() {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -23,8 +21,6 @@ class CityListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
     lateinit var adapter: CityListAdapter
-    @VisibleForTesting
-    lateinit var citiesListViewModel: CitiesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +36,7 @@ class CityListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        citiesListViewModel =
+        val citiesListViewModel =
             CityListViewModelFactory((this.application as CitiesApplication).repository).create(
                 CitiesListViewModel::class.java
             )
