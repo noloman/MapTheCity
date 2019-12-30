@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
 import me.manulorenzo.citymaps.R
 import me.manulorenzo.citymaps.about.AboutActivity
 import me.manulorenzo.citymaps.city.data.City
+import java.util.Locale
 
 class CityListAdapter(
     private val parentActivity: CityListActivity,
@@ -100,9 +101,11 @@ class CityListAdapter(
             } else {
                 val filteredList: MutableList<City> = arrayListOf()
                 for (row in cityList) {
-                    // TODO Improve
-                    if (row.name.toLowerCase().contains(charString.toLowerCase()) ||
-                        row.country.contains(charSequence)
+                    if (row.name.toLowerCase(Locale.getDefault()).contains(
+                            charString.toLowerCase(
+                                Locale.getDefault()
+                            )
+                        )
                     ) {
                         filteredList.add(row)
                     }
