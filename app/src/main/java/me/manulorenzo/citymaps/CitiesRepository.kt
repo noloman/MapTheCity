@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken
 import me.manulorenzo.citymaps.data.City
 import java.lang.reflect.Type
 
-
+@Mockable
 class CitiesRepository(private val application: Application) {
     fun getCities(): List<City> {
         val bufferReader = application.assets.open("cities.json").bufferedReader()
