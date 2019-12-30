@@ -33,7 +33,7 @@ class CityListAdapter constructor(
                 }
                 parentActivity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frameLayout, fragment)
+                    .replace(R.id.mapFragment, fragment)
                     .commit()
             } else {
                 // it's NOT two pane so replace the current fragment by the MapFragment
