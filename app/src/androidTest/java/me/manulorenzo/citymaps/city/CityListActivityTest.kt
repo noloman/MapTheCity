@@ -63,6 +63,16 @@ class CityListActivityTest {
         onView(withId(R.id.item_list)).check(withRowContaining(withText("Seville")))
     }
 
+    @Test
+    fun givenListOfCities_andWrongName_shouldOnlyShowNoCity() {
+        testRule.launchActivity(null)
+
+        onView(withId(R.id.action_search)).perform(ViewActions.click())
+        onView(withId(R.id.search_src_text)).perform(typeText("dasfdasdf"))
+
+        onView(withId(R.id.item_list)).check(RecyclerViewAssertions.withRecyclerViewOfSize(0))
+    }
+
     object RecyclerViewAssertions {
         /**
          * Provides a RecyclerView assertion based on a view matcher. This allows you to
@@ -95,6 +105,18 @@ class CityListActivityTest {
                     }
                 }
                 fail("No match found")
+            }
+        }
+
+        fun withRecyclerViewOfSize(size: Int): ViewAssertion? {
+            return ViewAssertion { view, noViewException ->
+                if (noViewException != null) {
+                    throw noViewException
+                }
+                assertTrue(view is RecyclerView)
+                val recyclerView = view as RecyclerView
+                val adapter = recyclerView.adapter
+                assertTrue(adapter?.itemCount == size)
             }
         }
 
