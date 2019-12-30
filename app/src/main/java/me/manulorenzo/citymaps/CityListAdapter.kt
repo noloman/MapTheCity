@@ -1,25 +1,37 @@
 package me.manulorenzo.citymaps
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.city_list_row.view.aboutButton
 import kotlinx.android.synthetic.main.city_list_row.view.cityNameTextView
 import kotlinx.android.synthetic.main.city_list_row.view.coordinatesTextView
 import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
+import me.manulorenzo.citymaps.about.AboutActivity
 import me.manulorenzo.citymaps.data.City
 
-class CityListAdapter constructor(
+class CityListAdapter(
     private val parentActivity: CityListActivity,
     private val cityList: List<City>,
     private val twoPane: Boolean
 ) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>(), Filterable {
     private var filteredCityList: List<City> = cityList
     private val onClickListener: View.OnClickListener
+    private val onButtonClickListener: View.OnClickListener = View.OnClickListener {
+        parentActivity.startActivity(
+            Intent(
+                parentActivity,
+                AboutActivity::class.java
+            )
+        )
+    }
 
     init {
         onClickListener = View.OnClickListener { v ->
@@ -63,7 +75,7 @@ class CityListAdapter constructor(
         // TODO Improve
         holderCity.cityCoordinates.text =
             city.coordinates.lat.toString() + ", " + city.coordinates.lon
-
+        holderCity.aboutButton.setOnClickListener(onButtonClickListener)
         with(holderCity.itemView) {
             tag = city
             setOnClickListener(onClickListener)
@@ -76,6 +88,7 @@ class CityListAdapter constructor(
         val cityName: TextView = view.cityNameTextView
         val cityCountryCode: TextView = view.countryCodeTextView
         val cityCoordinates: TextView = view.coordinatesTextView
+        val aboutButton: Button = view.aboutButton
     }
 
     override fun getFilter(): Filter = object : Filter() {
