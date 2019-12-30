@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_item_list.toolbar
+import kotlinx.android.synthetic.main.city_list_layout.citiesProgressBar
 import kotlinx.android.synthetic.main.city_list_layout.item_list
 import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
 import me.manulorenzo.citymaps.data.City
@@ -39,6 +40,8 @@ class CityListActivity : AppCompatActivity() {
 
         citiesListViewModel = ViewModelProviders.of(this).get(CitiesListViewModel::class.java)
         citiesListViewModel.allCities.observe(this, Observer { cityList: List<City> ->
+            citiesProgressBar.visibility = View.GONE
+            item_list.visibility = View.VISIBLE
             adapter = CityListAdapter(this, cityList, twoPane)
             item_list.adapter = adapter
         })
