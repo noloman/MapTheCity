@@ -18,6 +18,10 @@
     master/detail flow.
     
     -->
+    <ProgressBar
+        android:id="@+id/citiesProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_list"
@@ -26,6 +30,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layoutAnimation="@anim/cities_animation_appear_from_bottom"
         app:layoutManager="LinearLayoutManager"
         tools:context="me.manulorenzo.citymaps.CityListActivity"
         tools:listitem="@layout/city_list_row" />
