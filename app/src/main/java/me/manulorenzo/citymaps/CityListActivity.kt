@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -22,7 +23,8 @@ class CityListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
     lateinit var adapter: CityListAdapter
-    private lateinit var citiesListViewModel: CitiesListViewModel
+    @VisibleForTesting
+    lateinit var citiesListViewModel: CitiesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,9 @@ class CityListActivity : AppCompatActivity() {
         }
 
         citiesListViewModel =
-            CityListViewModelFactory(CitiesRepository(this.application)).create(CitiesListViewModel::class.java)
+            CityListViewModelFactory((this.application as CitiesApplication).repository).create(
+                CitiesListViewModel::class.java
+            )
         citiesListViewModel.allCities.observe(this, Observer { cityList: List<City> ->
             citiesProgressBar.visibility = View.GONE
             item_list.visibility = View.VISIBLE

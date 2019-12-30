@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 
 @Suppress("UNCHECKED_CAST")
 class CityListViewModelFactory(
-    private val repository: CitiesRepository
+    private val repository: Repository
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         CitiesListViewModel(repository) as T

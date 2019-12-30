@@ -7,8 +7,8 @@ import me.manulorenzo.citymaps.data.City
 import java.lang.reflect.Type
 
 @Mockable
-class CitiesRepository(private val application: Application) {
-    fun getCities(): List<City> {
+class CitiesRepository(private val application: Application) : Repository {
+    override fun getCities(): List<City> {
         val bufferReader = application.assets.open("cities.json").bufferedReader()
         val data = bufferReader.use {
             it.readText()

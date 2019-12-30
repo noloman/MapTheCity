@@ -5,6 +5,9 @@ import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 
 class CitiesApplication : Application() {
+    val repository: Repository
+        get() = ServiceLocator.provideCitiesRepository(this)
+
     override fun onCreate() {
         super.onCreate()
         StrictMode.setThreadPolicy(

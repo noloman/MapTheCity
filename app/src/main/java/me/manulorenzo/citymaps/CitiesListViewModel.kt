@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import me.manulorenzo.citymaps.data.City
 
-class CitiesListViewModel(private val repository: CitiesRepository) : ViewModel() {
+class CitiesListViewModel(private val repository: Repository) : ViewModel() {
     @VisibleForTesting
     val allCities: LiveData<List<City>> =
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
