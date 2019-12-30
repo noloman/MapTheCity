@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps.data
+package me.manulorenzo.citymaps.city.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,9 +1,10 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city.data.source
 
-import me.manulorenzo.citymaps.data.City
-import me.manulorenzo.citymaps.data.Coordinates
+import me.manulorenzo.citymaps.city.data.City
+import me.manulorenzo.citymaps.city.data.Coordinates
 
-class FakeCitiesRepository : Repository {
+class FakeCitiesRepository :
+    Repository {
     override fun getCities(): List<City> =
         listOf(
             City(

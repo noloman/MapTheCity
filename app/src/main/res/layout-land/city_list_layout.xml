@@ -11,7 +11,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".CityListActivity">
+    tools:context=".city.CityListActivity">
 
     <!--
     This layout is a two-pane layout for the Items
@@ -32,7 +32,7 @@
         android:layout_marginRight="16dp"
         android:layoutAnimation="@anim/cities_animation_appear_from_bottom"
         app:layoutManager="LinearLayoutManager"
-        tools:context="me.manulorenzo.citymaps.CityListActivity"
+        tools:context="me.manulorenzo.citymaps.city.CityListActivity"
         tools:listitem="@layout/city_list_row" />
 
     <fragment

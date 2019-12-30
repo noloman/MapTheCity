@@ -8,13 +8,15 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import me.manulorenzo.citymaps.data.City
-import me.manulorenzo.citymaps.data.Coordinates
+import me.manulorenzo.citymaps.city.CityListViewModel
+import me.manulorenzo.citymaps.city.data.City
+import me.manulorenzo.citymaps.city.data.Coordinates
+import me.manulorenzo.citymaps.city.data.source.CityRepository
 import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class CitiesListViewModelTest {
+class CityListViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
     @get:Rule
@@ -32,9 +34,10 @@ class CitiesListViewModelTest {
                 )
             )
             val observer: Observer<List<City>> = mock()
-            val repositoryMock: CitiesRepository = mock()
+            val repositoryMock: CityRepository = mock()
 
-            val sut = CitiesListViewModel(repositoryMock)
+            val sut =
+                CityListViewModel(repositoryMock)
             doAnswer { cityList }.whenever(repositoryMock).getCities()
 
             sut.allCities.observeForever(observer)

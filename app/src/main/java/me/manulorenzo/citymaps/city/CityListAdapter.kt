@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,8 +14,9 @@ import kotlinx.android.synthetic.main.city_list_row.view.aboutButton
 import kotlinx.android.synthetic.main.city_list_row.view.cityNameTextView
 import kotlinx.android.synthetic.main.city_list_row.view.coordinatesTextView
 import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
+import me.manulorenzo.citymaps.R
 import me.manulorenzo.citymaps.about.AboutActivity
-import me.manulorenzo.citymaps.data.City
+import me.manulorenzo.citymaps.city.data.City
 
 class CityListAdapter(
     private val parentActivity: CityListActivity,
@@ -38,9 +39,9 @@ class CityListAdapter(
             val city = v.tag as City
             if (twoPane) {
                 // It's two pane - we load the fragment
-                val fragment = MapFragment().apply {
+                val fragment = CityMapFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city.coordinates)
+                        putParcelable(CityMapFragment.CITY_COORDINATES_KEY, city.coordinates)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -49,9 +50,9 @@ class CityListAdapter(
                     .commit()
             } else {
                 // it's NOT two pane so replace the current fragment by the MapFragment
-                val fragment = MapFragment().apply {
+                val fragment = CityMapFragment().apply {
                     arguments = Bundle().apply {
-                        putParcelable(MapFragment.CITY_COORDINATES_KEY, city.coordinates)
+                        putParcelable(CityMapFragment.CITY_COORDINATES_KEY, city.coordinates)
                     }
                 }
                 parentActivity.supportFragmentManager

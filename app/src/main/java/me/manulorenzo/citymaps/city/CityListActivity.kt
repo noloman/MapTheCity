@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city
 
 import android.app.SearchManager
 import android.content.Context
@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.activity_item_list.toolbar
 import kotlinx.android.synthetic.main.city_list_layout.citiesProgressBar
 import kotlinx.android.synthetic.main.city_list_layout.item_list
 import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
-import me.manulorenzo.citymaps.data.City
+import me.manulorenzo.citymaps.CityMapsApplication
+import me.manulorenzo.citymaps.R
+import me.manulorenzo.citymaps.city.data.City
 
 class CityListActivity : AppCompatActivity() {
     /**
@@ -37,13 +39,18 @@ class CityListActivity : AppCompatActivity() {
         }
 
         val citiesListViewModel =
-            CityListViewModelFactory((this.application as CitiesApplication).repository).create(
-                CitiesListViewModel::class.java
+            CityListViewModelFactory((this.application as CityMapsApplication).repository)
+                .create(
+                    CityListViewModel::class.java
             )
         citiesListViewModel.allCities.observe(this, Observer { cityList: List<City> ->
             citiesProgressBar.visibility = View.GONE
             item_list.visibility = View.VISIBLE
-            adapter = CityListAdapter(this, cityList, twoPane)
+            adapter = CityListAdapter(
+                this,
+                cityList,
+                twoPane
+            )
             item_list.adapter = adapter
         })
     }

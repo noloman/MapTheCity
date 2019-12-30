@@ -3,8 +3,10 @@ package me.manulorenzo.citymaps
 import android.app.Application
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
+import me.manulorenzo.citymaps.city.data.source.Repository
+import me.manulorenzo.citymaps.city.data.source.ServiceLocator
 
-class CitiesApplication : Application() {
+class CityMapsApplication : Application() {
     val repository: Repository
         get() = ServiceLocator.provideCitiesRepository(this)
 

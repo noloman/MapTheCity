@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.Espresso.onView
@@ -8,6 +8,10 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import me.manulorenzo.citymaps.R
+import me.manulorenzo.citymaps.city.data.source.FakeCitiesRepository
+import me.manulorenzo.citymaps.city.data.source.Repository
+import me.manulorenzo.citymaps.city.data.source.ServiceLocator
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

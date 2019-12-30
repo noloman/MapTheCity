@@ -1,13 +1,14 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city.data.source
 
 import android.app.Application
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import me.manulorenzo.citymaps.data.City
+import me.manulorenzo.citymaps.city.data.City
 import java.lang.reflect.Type
 
 @Mockable
-class CitiesRepository(private val application: Application) : Repository {
+class CityRepository(private val application: Application) :
+    Repository {
     override fun getCities(): List<City> {
         val bufferReader = application.assets.open("cities.json").bufferedReader()
         val data = bufferReader.use {

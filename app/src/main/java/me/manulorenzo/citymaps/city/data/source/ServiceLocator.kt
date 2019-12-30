@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city.data.source
 
 import android.app.Application
 import android.content.Context
@@ -11,12 +11,16 @@ object ServiceLocator {
 
     fun provideCitiesRepository(context: Context): Repository {
         synchronized(this) {
-            return repository ?: createCitiesRepository(context)
+            return repository
+                ?: createCitiesRepository(
+                    context
+                )
         }
     }
 
     private fun createCitiesRepository(context: Context): Repository {
-        val citiesRepository = CitiesRepository(context.applicationContext as Application)
+        val citiesRepository =
+            CityRepository(context.applicationContext as Application)
         repository = citiesRepository
         return citiesRepository
     }

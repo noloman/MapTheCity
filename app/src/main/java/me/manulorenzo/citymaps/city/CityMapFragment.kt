@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city
 
 import android.os.Bundle
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -7,9 +7,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import me.manulorenzo.citymaps.data.Coordinates
+import me.manulorenzo.citymaps.city.data.Coordinates
 
-class MapFragment : SupportMapFragment(), OnMapReadyCallback {
+class CityMapFragment : SupportMapFragment(), OnMapReadyCallback {
     companion object {
         const val CITY_COORDINATES_KEY = "city_coordinates"
     }
