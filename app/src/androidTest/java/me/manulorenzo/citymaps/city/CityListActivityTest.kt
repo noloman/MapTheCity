@@ -55,22 +55,26 @@ class CityListActivityTest {
 
     @Test
     fun givenListOfCities_andCertainName_shouldOnlyShowOneCity() {
+        val seville = "Seville"
         testRule.launchActivity(null)
 
-        onView(withId(R.id.action_search)).perform(ViewActions.click())
-        onView(withId(R.id.search_src_text)).perform(typeText("Seville"))
+        performSearch(seville)
 
-        onView(withId(R.id.item_list)).check(withRowContaining(withText("Seville")))
+        onView(withId(R.id.item_list)).check(withRowContaining(withText(seville)))
     }
 
     @Test
     fun givenListOfCities_andWrongName_shouldOnlyShowNoCity() {
         testRule.launchActivity(null)
 
-        onView(withId(R.id.action_search)).perform(ViewActions.click())
-        onView(withId(R.id.search_src_text)).perform(typeText("dasfdasdf"))
+        performSearch("dasfdasdf")
 
         onView(withId(R.id.item_list)).check(RecyclerViewAssertions.withRecyclerViewOfSize(0))
+    }
+
+    private fun performSearch(searchTerm: String) {
+        onView(withId(R.id.action_search)).perform(ViewActions.click())
+        onView(withId(R.id.search_src_text)).perform(typeText(searchTerm))
     }
 
     object RecyclerViewAssertions {
