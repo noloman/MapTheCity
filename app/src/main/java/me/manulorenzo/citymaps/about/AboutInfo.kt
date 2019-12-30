@@ -5,11 +5,10 @@ package me.manulorenzo.citymaps.about
  * DTO representing aboutInfo object
  */
 
-class AboutInfo {
-    var companyName: String? = null
-    var companyAddress: String? = null
-    var companyPostal: String? = null
-    var companyCity: String? = null
-    var aboutInfo: String? = null
-
-}
+class AboutInfo(
+    val companyName: String? = null,
+    val companyAddress: String? = null,
+    val companyPostal: String? = null,
+    val companyCity: String? = null,
+    val aboutInfo: String? = null
+)

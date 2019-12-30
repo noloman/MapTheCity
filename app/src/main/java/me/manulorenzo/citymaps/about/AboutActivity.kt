@@ -30,39 +30,39 @@ class AboutActivity : AppCompatActivity(), View {
         errorView = findViewById(R.id.errorView)
         infoContainer = findViewById(R.id.infoContainer)
         // TODO
-//        aboutPresenter.getAboutInfo()
+        aboutPresenter.aboutInfo
     }
 
-    override fun setCompanyName(companyNameString: String?) {
-        infoContainer!!.visibility = android.view.View.VISIBLE
-        companyName!!.text = companyNameString
+    override fun setCompanyName(companyName: String?) {
+        infoContainer?.visibility = android.view.View.VISIBLE
+        this.companyName?.text = companyName
     }
 
-    override fun setCompanyAddress(companyAddressString: String?) {
-        companyAddress!!.text = companyAddressString
+    override fun setCompanyAddress(companyAddress: String?) {
+        this.companyAddress?.text = companyAddress
     }
 
-    override fun setCompanyPostalCode(postalCodeString: String??) {
-        companyPostal!!.text = postalCodeString
+    override fun setCompanyPostalCode(postalCode: String??) {
+        companyPostal?.text = postalCode
     }
 
-    override fun setCompanyCity(companyCityString: String?) {
-        companyCity!!.text = companyCityString
+    override fun setCompanyCity(companyCity: String?) {
+        this.companyCity?.text = companyCity
     }
 
-    override fun setAboutInfo(infoString: String?) {
-        aboutInfo!!.text = infoString
+    override fun setAboutInfo(info: String?) {
+        aboutInfo?.text = info
     }
 
     override fun showError() {
-        errorView!!.visibility = android.view.View.VISIBLE
+        errorView?.visibility = android.view.View.VISIBLE
     }
 
     override fun showProgress() {
-        progressBar!!.visibility = android.view.View.VISIBLE
+        progressBar?.visibility = android.view.View.VISIBLE
     }
 
     override fun hideProgress() {
-        progressBar!!.visibility = android.view.View.GONE
+        progressBar?.visibility = android.view.View.GONE
     }
 }

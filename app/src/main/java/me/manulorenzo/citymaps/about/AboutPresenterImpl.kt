@@ -2,7 +2,6 @@ package me.manulorenzo.citymaps.about
 
 import android.content.Context
 import android.os.Handler
-import androidx.annotation.NonNull
 import me.manulorenzo.citymaps.about.About.Presenter
 import me.manulorenzo.citymaps.about.About.View
 import java.lang.ref.WeakReference
@@ -11,14 +10,14 @@ import java.lang.ref.WeakReference
  * Created by Backbase R&D B.V on 28/06/2018.
  */
 
-class AboutPresenterImpl(view: View, @NonNull context: Context?) :
+class AboutPresenterImpl(view: View, context: Context) :
     Presenter {
     private val aboutView: WeakReference<View> = WeakReference(view)
     private val aboutModel: AboutModelImpl = AboutModelImpl(this, context)
     override val aboutInfo: Unit
         get() {
             val aboutViewImpl = aboutView.get()
-            aboutViewImpl!!.showProgress()
+            aboutViewImpl?.showProgress()
             Handler().postDelayed({ aboutModel.aboutInfo }, 1000)
         }
 
