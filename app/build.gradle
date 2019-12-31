@@ -35,7 +35,7 @@ android {
 }
 
 allOpen {
-    annotation("me.manulorenzo.citymaps.city.data.source.Mockable")
+    annotation("me.manulorenzo.citymaps.data.source.Mockable")
 }
 
 dependencies {

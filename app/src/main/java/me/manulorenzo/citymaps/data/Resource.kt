@@ -1,5 +1,8 @@
 package me.manulorenzo.citymaps.data
 
+/**
+ * Sealed to help encapsulate the data modeling it with the different states it can have.
+ */
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null

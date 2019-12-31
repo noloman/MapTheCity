@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps.city.data.source
+package me.manulorenzo.citymaps.data.source
 
 import me.manulorenzo.citymaps.about.AboutInfo
 import me.manulorenzo.citymaps.city.data.City

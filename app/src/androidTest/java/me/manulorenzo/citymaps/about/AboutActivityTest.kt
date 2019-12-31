@@ -11,9 +11,9 @@ import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.manulorenzo.citymaps.R
-import me.manulorenzo.citymaps.city.data.source.FakeCitiesRepository
-import me.manulorenzo.citymaps.city.data.source.Repository
-import me.manulorenzo.citymaps.city.data.source.ServiceLocator
+import me.manulorenzo.citymaps.data.source.FakeCitiesRepository
+import me.manulorenzo.citymaps.data.source.Repository
+import me.manulorenzo.citymaps.data.source.ServiceLocator
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

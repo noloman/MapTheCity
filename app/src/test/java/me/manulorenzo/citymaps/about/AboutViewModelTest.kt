@@ -10,8 +10,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import me.manulorenzo.citymaps.CoroutinesTestRule
-import me.manulorenzo.citymaps.city.data.source.Repository
 import me.manulorenzo.citymaps.data.Resource
+import me.manulorenzo.citymaps.data.source.Repository
 import org.junit.Rule
 import org.junit.Test
 

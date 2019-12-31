@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps.city.data.source
+package me.manulorenzo.citymaps.data.source
 
 import android.app.Application
 import android.content.Context

@@ -2,6 +2,7 @@
   <dictionary name="manu">
     <words>
       <w>gson</w>
+      <w>mockable</w>
     </words>
   </dictionary>
 </component>

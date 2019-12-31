@@ -2,7 +2,7 @@ package me.manulorenzo.citymaps.about
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.manulorenzo.citymaps.city.data.source.Repository
+import me.manulorenzo.citymaps.data.source.Repository
 
 @Suppress("UNCHECKED_CAST")
 class AboutViewModelFactory(

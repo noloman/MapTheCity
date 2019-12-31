@@ -7,7 +7,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import me.manulorenzo.citymaps.city.data.City
-import me.manulorenzo.citymaps.city.data.source.Repository
+import me.manulorenzo.citymaps.data.source.Repository
 
 class CityListViewModel(private val repository: Repository) : ViewModel() {
     @VisibleForTesting
