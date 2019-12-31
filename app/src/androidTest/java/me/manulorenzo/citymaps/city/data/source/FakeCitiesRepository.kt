@@ -44,4 +44,13 @@ class FakeCitiesRepository :
                 Coordinates(39.742043, -104.991531)
             )
         )
+
+    override fun getAbout(): String? =
+        """{
+            "companyName": "Backbase",
+            "companyAddress": "Jacob Bontiusplaats 9",
+            "postalCode": "1018 LL",
+            "city": "Amsterdam",
+            "details": "This is the Backbase assignment for Android engineering positions."
+        }"""
 }
