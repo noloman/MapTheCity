@@ -20,7 +20,7 @@ object ServiceLocator {
 
     private fun createCitiesRepository(context: Context): Repository {
         val citiesRepository =
-            CityRepository(context.applicationContext as Application)
+            RepositoryImpl(context.applicationContext as Application)
         repository = citiesRepository
         return citiesRepository
     }

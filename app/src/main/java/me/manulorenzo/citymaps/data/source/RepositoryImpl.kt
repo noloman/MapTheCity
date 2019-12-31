@@ -9,7 +9,7 @@ import me.manulorenzo.citymaps.data.Resource
 import java.lang.reflect.Type
 
 @Mockable
-class CityRepository(private val application: Application) :
+class RepositoryImpl(private val application: Application) :
     Repository {
     // TODO Wrap around a Resource
     override suspend fun getCities(): List<City> {
