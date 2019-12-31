@@ -4,32 +4,24 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import me.manulorenzo.citymaps.CityMapsApplication
 import me.manulorenzo.citymaps.R
 import me.manulorenzo.citymaps.about.About.View
 
 class AboutActivity : AppCompatActivity(), View {
-    private var companyName: TextView? = null
-    private var companyAddress: TextView? = null
-    private var companyPostal: TextView? = null
-    private var companyCity: TextView? = null
-    private var aboutInfo: TextView? = null
-    private var progressBar: ProgressBar? = null
-    private var errorView: android.view.View? = null
-    private var infoContainer: android.view.View? = null
+    private val companyName: TextView? by lazy { findViewById<TextView>(R.id.companyName) }
+    private val companyAddress: TextView? by lazy { findViewById<TextView>(R.id.companyAdress) }
+    private val companyPostal: TextView? by lazy { findViewById<TextView>(R.id.companypostal) }
+    private val companyCity: TextView? by lazy { findViewById<TextView>(R.id.companyCity) }
+    private val aboutInfo: TextView? by lazy { findViewById<TextView>(R.id.aboutInfo) }
+    private val progressBar: ProgressBar? by lazy { findViewById<ProgressBar>(R.id.progressBar) }
+    private val errorView: android.view.View? by lazy { findViewById<android.view.View?>(R.id.errorView) }
+    private val infoContainer: android.view.View? by lazy { findViewById<android.view.View?>(R.id.infoContainer) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val aboutPresenter =
-            AboutPresenterImpl(this, this)
-        companyName = findViewById(R.id.companyName)
-        companyAddress = findViewById(R.id.companyAdress)
-        companyPostal = findViewById(R.id.companypostal)
-        companyCity = findViewById(R.id.companyCity)
-        aboutInfo = findViewById(R.id.aboutInfo)
-        progressBar = findViewById(R.id.progressBar)
-        errorView = findViewById(R.id.errorView)
-        infoContainer = findViewById(R.id.infoContainer)
-        // TODO
+            AboutPresenterImpl(this, (this.application as CityMapsApplication).repository)
         aboutPresenter.aboutInfo
     }
 
