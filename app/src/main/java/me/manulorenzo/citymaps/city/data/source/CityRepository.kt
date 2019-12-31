@@ -3,13 +3,16 @@ package me.manulorenzo.citymaps.city.data.source
 import android.app.Application
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import me.manulorenzo.citymaps.about.AboutInfo
 import me.manulorenzo.citymaps.city.data.City
+import me.manulorenzo.citymaps.data.Resource
 import java.lang.reflect.Type
 
 @Mockable
 class CityRepository(private val application: Application) :
     Repository {
-    override fun getCities(): List<City> {
+    // TODO Wrap around a Resource
+    override suspend fun getCities(): List<City> {
         val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
         val data = bufferReader.use {
             it.readText()
@@ -19,10 +22,19 @@ class CityRepository(private val application: Application) :
         return gson.fromJson(data, type)
     }
 
-    override fun getAbout(): String? {
-        val bufferReader = application.assets.open(ABOUT_FILE_NAME).bufferedReader()
-        return bufferReader.use {
-            it.readText()
+    override suspend fun getAbout(): Resource<AboutInfo> {
+        return try {
+            val bufferReader = application.assets.open(ABOUT_FILE_NAME).bufferedReader()
+            val data = bufferReader.use {
+                it.readText()
+            }
+            val gson = GsonBuilder().create()
+            val type: Type = object : TypeToken<AboutInfo?>() {}.type
+            val aboutInfo: AboutInfo = gson.fromJson(data, type)
+            return Resource.Success(aboutInfo)
+            // TODO Catch specific exceptions
+        } catch (e: Exception) {
+            Resource.Error("Error retrieving object")
         }
     }
 

@@ -1,4 +1,4 @@
-package me.manulorenzo.citymaps
+package me.manulorenzo.citymaps.city
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -8,10 +8,10 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import me.manulorenzo.citymaps.city.CityListViewModel
+import me.manulorenzo.citymaps.CoroutinesTestRule
 import me.manulorenzo.citymaps.city.data.City
 import me.manulorenzo.citymaps.city.data.Coordinates
-import me.manulorenzo.citymaps.city.data.source.CityRepository
+import me.manulorenzo.citymaps.city.data.source.Repository
 import org.junit.Rule
 import org.junit.Test
 
@@ -34,7 +34,7 @@ class CityListViewModelTest {
                 )
             )
             val observer: Observer<List<City>> = mock()
-            val repositoryMock: CityRepository = mock()
+            val repositoryMock: Repository = mock()
 
             val sut =
                 CityListViewModel(repositoryMock)

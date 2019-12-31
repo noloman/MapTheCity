@@ -31,7 +31,8 @@ class AboutActivityTest {
 
     @Before
     fun setUp() {
-        repository = FakeCitiesRepository()
+        repository =
+            FakeCitiesRepository()
         ServiceLocator.repository = repository
     }
 

@@ -31,7 +31,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class CityListActivityTest {
@@ -43,7 +42,8 @@ class CityListActivityTest {
 
     @Before
     fun setup() {
-        repository = FakeCitiesRepository()
+        repository =
+            FakeCitiesRepository()
         ServiceLocator.repository = repository
     }
 

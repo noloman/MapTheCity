@@ -1,11 +1,13 @@
 package me.manulorenzo.citymaps.city.data.source
 
+import me.manulorenzo.citymaps.about.AboutInfo
 import me.manulorenzo.citymaps.city.data.City
 import me.manulorenzo.citymaps.city.data.Coordinates
+import me.manulorenzo.citymaps.data.Resource
 
 class FakeCitiesRepository :
     Repository {
-    override fun getCities(): List<City> =
+    override suspend fun getCities(): List<City> =
         listOf(
             City(
                 1,
@@ -45,12 +47,14 @@ class FakeCitiesRepository :
             )
         )
 
-    override fun getAbout(): String? =
-        """{
-            "companyName": "Backbase",
-            "companyAddress": "Jacob Bontiusplaats 9",
-            "postalCode": "1018 LL",
-            "city": "Amsterdam",
-            "details": "This is the Backbase assignment for Android engineering positions."
-        }"""
+    override suspend fun getAbout(): Resource<AboutInfo> =
+        Resource.Success(
+            AboutInfo(
+                companyName = "Backbase",
+                companyAddress = "Jacob Bontiusplaats 9",
+                companyPostal = "1018 LL",
+                companyCity = "Amsterdam",
+                aboutInfo = "This is the Backbase assignment for Android engineering positions."
+            )
+        )
 }

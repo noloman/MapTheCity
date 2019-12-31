@@ -4,57 +4,78 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import me.manulorenzo.citymaps.CityMapsApplication
 import me.manulorenzo.citymaps.R
-import me.manulorenzo.citymaps.about.About.View
+import me.manulorenzo.citymaps.data.Resource
 
-class AboutActivity : AppCompatActivity(), View {
+class AboutActivity : AppCompatActivity() {
     private val companyName: TextView? by lazy { findViewById<TextView>(R.id.companyName) }
     private val companyAddress: TextView? by lazy { findViewById<TextView>(R.id.companyAdress) }
     private val companyPostal: TextView? by lazy { findViewById<TextView>(R.id.companypostal) }
     private val companyCity: TextView? by lazy { findViewById<TextView>(R.id.companyCity) }
-    private val aboutInfo: TextView? by lazy { findViewById<TextView>(R.id.aboutInfo) }
+    private val aboutInfoTextView: TextView? by lazy { findViewById<TextView>(R.id.aboutInfo) }
     private val progressBar: ProgressBar? by lazy { findViewById<ProgressBar>(R.id.progressBar) }
     private val errorView: android.view.View? by lazy { findViewById<android.view.View?>(R.id.errorView) }
     private val infoContainer: android.view.View? by lazy { findViewById<android.view.View?>(R.id.infoContainer) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val aboutPresenter =
-            AboutPresenterImpl(this, (this.application as CityMapsApplication).repository)
-        aboutPresenter.aboutInfo
+        // TODO Refactor to have only one factory
+        val aboutViewModel =
+            AboutViewModelFactory((this.application as CityMapsApplication).repository)
+                .create(
+                    AboutViewModel::class.java
+                )
+        aboutViewModel.aboutInfo.observe(this, Observer {
+            when (it) {
+                is Resource.Loading -> showProgress()
+                is Resource.Error<*> -> {
+                    hideProgress()
+                    showError()
+                }
+                is Resource.Success<*> -> {
+                    hideProgress()
+                    setCompanyName(it.data)
+                    setCompanyAddress(it.data)
+                    setCompanyPostalCode(it.data)
+                    setCompanyCity(it.data)
+                    setAboutInfo(it.data)
+                }
+            }
+        })
     }
 
-    override fun setCompanyName(companyName: String?) {
+    private fun setCompanyName(aboutInfo: AboutInfo?) {
         infoContainer?.visibility = android.view.View.VISIBLE
-        this.companyName?.text = companyName
+        this.companyName?.text = aboutInfo?.companyName
     }
 
-    override fun setCompanyAddress(companyAddress: String?) {
-        this.companyAddress?.text = companyAddress
+    private fun setCompanyAddress(aboutInfo: AboutInfo?) {
+        this.companyAddress?.text = aboutInfo?.companyAddress
     }
 
-    override fun setCompanyPostalCode(postalCode: String??) {
-        companyPostal?.text = postalCode
+    private fun setCompanyPostalCode(aboutInfo: AboutInfo?) {
+        companyPostal?.text = aboutInfo?.companyPostal
     }
 
-    override fun setCompanyCity(companyCity: String?) {
-        this.companyCity?.text = companyCity
+    private fun setCompanyCity(aboutInfo: AboutInfo?) {
+        this.companyCity?.text = aboutInfo?.companyCity
     }
 
-    override fun setAboutInfo(info: String?) {
-        aboutInfo?.text = info
+    private fun setAboutInfo(aboutInfo: AboutInfo?) {
+        aboutInfoTextView?.text = aboutInfo?.aboutInfo
     }
 
-    override fun showError() {
+    private fun showError() {
         errorView?.visibility = android.view.View.VISIBLE
     }
 
-    override fun showProgress() {
+    private fun showProgress() {
         progressBar?.visibility = android.view.View.VISIBLE
     }
 
-    override fun hideProgress() {
+    private fun hideProgress() {
         progressBar?.visibility = android.view.View.GONE
     }
 }

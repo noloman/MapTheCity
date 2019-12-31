@@ -5,10 +5,10 @@ package me.manulorenzo.citymaps.about
  * DTO representing aboutInfo object
  */
 
-class AboutInfo(
-    val companyName: String? = null,
-    val companyAddress: String? = null,
-    val companyPostal: String? = null,
-    val companyCity: String? = null,
-    val aboutInfo: String? = null
+data class AboutInfo(
+    val companyName: String,
+    val companyAddress: String,
+    val companyPostal: String,
+    val companyCity: String,
+    val aboutInfo: String
 )
