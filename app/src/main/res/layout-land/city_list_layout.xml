@@ -25,14 +25,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_list"
-        android:name="me.manulorenzo.citymaps.ItemListFragment"
+        android:name="me.manulorenzo.mapthecity.ItemListFragment"
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layoutAnimation="@anim/cities_animation_appear_from_bottom"
         app:layoutManager="LinearLayoutManager"
-        tools:context="me.manulorenzo.citymaps.city.CityListActivity"
+        tools:context="me.manulorenzo.mapthecity.city.CityListActivity"
         tools:listitem="@layout/city_list_row" />
 
     <fragment

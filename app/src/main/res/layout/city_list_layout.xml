@@ -16,7 +16,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_list"
-        android:name="me.manulorenzo.citymaps.ItemListFragment"
+        android:name="mapthecity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutAnimation="@anim/cities_animation_appear_from_bottom"
@@ -26,6 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context="me.manulorenzo.citymaps.city.CityListActivity"
+        tools:context="me.manulorenzo.mapthecity.city.CityListActivity"
         tools:listitem="@layout/city_list_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

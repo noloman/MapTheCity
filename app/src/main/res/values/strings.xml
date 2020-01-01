@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CityMaps</string>
+    <string name="app_name">Map the city</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_maps">Map</string>
 </resources>
