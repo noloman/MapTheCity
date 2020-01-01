@@ -2,25 +2,32 @@ package me.manulorenzo.citymaps.data.source
 
 import android.app.Application
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import me.manulorenzo.citymaps.about.AboutInfo
 import me.manulorenzo.citymaps.city.data.City
 import me.manulorenzo.citymaps.data.Resource
+import java.io.IOException
 import java.lang.reflect.Type
 
 @Mockable
 class RepositoryImpl(private val application: Application) :
     Repository {
-    // TODO Wrap around a Resource
-    override suspend fun getCities(): List<City> {
-        val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
-        val data = bufferReader.use {
-            it.readText()
+    override suspend fun getCities(): Resource<List<City>> =
+        try {
+            val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
+            val data = bufferReader.use {
+                it.readText()
+            }
+            val gson = GsonBuilder().create()
+            val type: Type = object : TypeToken<ArrayList<City?>?>() {}.type
+            val fromJson = gson.fromJson<List<City>>(data, type)
+            Resource.Success(fromJson)
+        } catch (e: JsonSyntaxException) {
+            Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
+        } catch (e: IOException) {
+            Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
         }
-        val gson = GsonBuilder().create()
-        val type: Type = object : TypeToken<ArrayList<City?>?>() {}.type
-        return gson.fromJson(data, type)
-    }
 
     override suspend fun getAbout(): Resource<AboutInfo> {
         return try {
@@ -41,5 +48,7 @@ class RepositoryImpl(private val application: Application) :
     companion object {
         private const val ABOUT_FILE_NAME = "aboutInfo.json"
         private const val CITIES_FILE_NAME = "cities.json"
+        private const val IOEXCEPTION_ERROR_MESSAGE = "Error opening file from assets"
+        private const val JSONSYNTAXEXCEPTION_ERROR_MESSAGE = "Error parsing JSON"
     }
 }

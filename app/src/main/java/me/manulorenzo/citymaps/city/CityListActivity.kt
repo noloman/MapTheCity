@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.city_list_layout.landscapeLayout
 import me.manulorenzo.citymaps.CityMapsApplication
 import me.manulorenzo.citymaps.R
 import me.manulorenzo.citymaps.city.data.City
+import me.manulorenzo.citymaps.data.Resource
 
 class CityListActivity : AppCompatActivity() {
     /**
@@ -42,16 +43,24 @@ class CityListActivity : AppCompatActivity() {
             CityListViewModelFactory((this.application as CityMapsApplication).repository)
                 .create(
                     CityListViewModel::class.java
-            )
-        citiesListViewModel.allCities.observe(this, Observer { cityList: List<City> ->
-            citiesProgressBar.visibility = View.GONE
-            item_list.visibility = View.VISIBLE
-            adapter = CityListAdapter(
-                this,
-                cityList,
-                twoPane
-            )
-            item_list.adapter = adapter
+                )
+        citiesListViewModel.allCities.observe(this, Observer { cityList: Resource<List<City>> ->
+            when (cityList) {
+                is Resource.Loading -> {
+                    citiesProgressBar.visibility = View.GONE
+                    item_list.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    if (cityList.data != null) {
+                        adapter = CityListAdapter(
+                            this,
+                            cityList.data,
+                            twoPane
+                        )
+                        item_list.adapter = adapter
+                    }
+                }
+            }
         })
     }
 
