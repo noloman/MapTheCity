@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import me.manulorenzo.citymaps.CityMapsApplication
 import me.manulorenzo.citymaps.R
+import me.manulorenzo.citymaps.city.CityListViewModelFactory
 import me.manulorenzo.citymaps.data.Resource
 
 class AboutActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // TODO Refactor to have only one factory
         val aboutViewModel =
-            AboutViewModelFactory((this.application as CityMapsApplication).repository)
+            CityListViewModelFactory((this.application as CityMapsApplication).repository)
                 .create(
                     AboutViewModel::class.java
                 )
