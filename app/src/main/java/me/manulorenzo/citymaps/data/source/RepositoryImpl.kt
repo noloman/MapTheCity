@@ -29,8 +29,8 @@ class RepositoryImpl(private val application: Application) :
             Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
         }
 
-    override suspend fun getAbout(): Resource<AboutInfo> {
-        return try {
+    override suspend fun getAbout(): Resource<AboutInfo> =
+        try {
             val bufferReader = application.assets.open(ABOUT_FILE_NAME).bufferedReader()
             val data = bufferReader.use {
                 it.readText()
@@ -38,12 +38,12 @@ class RepositoryImpl(private val application: Application) :
             val gson = GsonBuilder().create()
             val type: Type = object : TypeToken<AboutInfo?>() {}.type
             val aboutInfo: AboutInfo = gson.fromJson(data, type)
-            return Resource.Success(aboutInfo)
-            // TODO Catch specific exceptions
-        } catch (e: Exception) {
-            Resource.Error("Error retrieving object")
+            Resource.Success(aboutInfo)
+        } catch (e: JsonSyntaxException) {
+            Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
+        } catch (e: IOException) {
+            Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
         }
-    }
 
     companion object {
         private const val ABOUT_FILE_NAME = "aboutInfo.json"
