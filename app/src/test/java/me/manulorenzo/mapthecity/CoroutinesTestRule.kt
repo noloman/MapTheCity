@@ -21,5 +21,4 @@ class CoroutinesTestRule(private val dispatcher: TestCoroutineDispatcher = TestC
         super.finished(description)
         Dispatchers.resetMain()
     }
-
 }

@@ -1,7 +1,5 @@
 package me.manulorenzo.mapthecity.city
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,55 +13,16 @@ import kotlinx.android.synthetic.main.city_list_row.view.cityNameTextView
 import kotlinx.android.synthetic.main.city_list_row.view.coordinatesTextView
 import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.about.AboutActivity
 import me.manulorenzo.mapthecity.city.data.City
 import java.util.Locale
 
 class CityListAdapter(
     private val parentActivity: CityListActivity,
     private val cityList: List<City>,
-    private val twoPane: Boolean
+    private val onClickListener: View.OnClickListener,
+    private val onButtonClickListener: View.OnClickListener
 ) : RecyclerView.Adapter<CityListAdapter.CityViewHolder>(), Filterable {
     private var filteredCityList: List<City> = cityList
-    private val onClickListener: View.OnClickListener
-    private val onButtonClickListener: View.OnClickListener = View.OnClickListener {
-        parentActivity.startActivity(
-            Intent(
-                parentActivity,
-                AboutActivity::class.java
-            )
-        )
-    }
-
-    init {
-        onClickListener = View.OnClickListener { v ->
-            val city = v.tag as City
-            if (twoPane) {
-                // It's two pane - we load the fragment
-                val fragment = CityMapFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(CityMapFragment.CITY_COORDINATES_KEY, city.coordinates)
-                    }
-                }
-                parentActivity.supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mapFragment, fragment)
-                    .commit()
-            } else {
-                // it's NOT two pane so replace the current fragment by the MapFragment
-                val fragment = CityMapFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(CityMapFragment.CITY_COORDINATES_KEY, city.coordinates)
-                    }
-                }
-                parentActivity.supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.frameLayout, fragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val view = LayoutInflater.from(parent.context)
