@@ -13,41 +13,64 @@ import java.lang.reflect.Type
 @Mockable
 class RepositoryImpl(private val application: Application) :
     Repository {
+    lateinit var cities: Resource<List<City>>
+    lateinit var about: Resource<AboutInfo>
     /**
      * Ideally the list of cities would be retrieved from a DB for example, and we would sort the cities
      * alphabetically. Nevertheless here I'm just going to sort them using business logic in the repository, as we don't have a DB.
      */
-    override suspend fun getCities(): Resource<List<City>> =
-        try {
-            val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
-            val data = bufferReader.use {
-                it.readText()
+    override suspend fun getCities(): Resource<List<City>> {
+        synchronized(this) {
+            if (::cities.isInitialized && cities is Resource.Success) {
+                return cities
+            } else {
+                try {
+                    val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
+                    val data = bufferReader.use {
+                        it.readText()
+                    }
+                    val gson = GsonBuilder().create()
+                    val type: Type = object : TypeToken<ArrayList<City?>?>() {}.type
+                    val fromJson: List<City> =
+                        gson.fromJson<List<City>>(data, type).sortedBy { it.name }
+                    cities = Resource.Success(fromJson)
+                    return cities
+                } catch (e: JsonSyntaxException) {
+                    cities = Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
+                    return cities
+                } catch (e: IOException) {
+                    cities = Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
+                    return cities
+                }
             }
-            val gson = GsonBuilder().create()
-            val type: Type = object : TypeToken<ArrayList<City?>?>() {}.type
-            val fromJson: List<City> = gson.fromJson<List<City>>(data, type).sortedBy { it.name }
-            Resource.Success(fromJson)
-        } catch (e: JsonSyntaxException) {
-            Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
-        } catch (e: IOException) {
-            Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
         }
+    }
 
-    override suspend fun getAbout(): Resource<AboutInfo> =
-        try {
-            val bufferReader = application.assets.open(ABOUT_FILE_NAME).bufferedReader()
-            val data = bufferReader.use {
-                it.readText()
+    override suspend fun getAbout(): Resource<AboutInfo> {
+        synchronized(this) {
+            if (::about.isInitialized && about is Resource.Success) {
+                return about
+            } else {
+                try {
+                    val bufferReader = application.assets.open(ABOUT_FILE_NAME).bufferedReader()
+                    val data = bufferReader.use {
+                        it.readText()
+                    }
+                    val gson = GsonBuilder().create()
+                    val type: Type = object : TypeToken<AboutInfo?>() {}.type
+                    val aboutInfo: AboutInfo = gson.fromJson(data, type)
+                    about = Resource.Success(aboutInfo)
+                    return about
+                } catch (e: JsonSyntaxException) {
+                    about = Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
+                    return about
+                } catch (e: IOException) {
+                    about = Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
+                    return about
+                }
             }
-            val gson = GsonBuilder().create()
-            val type: Type = object : TypeToken<AboutInfo?>() {}.type
-            val aboutInfo: AboutInfo = gson.fromJson(data, type)
-            Resource.Success(aboutInfo)
-        } catch (e: JsonSyntaxException) {
-            Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)
-        } catch (e: IOException) {
-            Resource.Error(IOEXCEPTION_ERROR_MESSAGE)
         }
+    }
 
     companion object {
         private const val ABOUT_FILE_NAME = "aboutInfo.json"
