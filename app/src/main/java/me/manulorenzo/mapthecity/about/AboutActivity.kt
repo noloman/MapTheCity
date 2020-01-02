@@ -22,7 +22,6 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // TODO Refactor to have only one factory
         val aboutViewModel =
             CityListViewModelFactory((this.application as MapTheCityApplication).repository)
                 .create(
