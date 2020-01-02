@@ -49,17 +49,10 @@ class CityListActivity : AppCompatActivity() {
 
     fun loadCityMapFragmentWhenClicked(coordinates: Coordinates) {
         if (twoPane) {
-            // TODO It should not replace the fragment at all
             // It's two pane - we load the fragment
-            val fragment = CityMapFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(CityMapFragment.CITY_COORDINATES_KEY, coordinates)
-                }
-            }
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.mapFragment, fragment)
-                .commit()
+            val fragment =
+                supportFragmentManager.findFragmentByTag(CityMapFragment::class.java.simpleName) as CityMapFragment
+            fragment.onCityChanged(coordinates)
         } else {
             // it's NOT two pane so replace the current fragment by the MapFragment
             val fragment = CityMapFragment().apply {

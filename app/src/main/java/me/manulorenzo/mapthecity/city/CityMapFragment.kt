@@ -31,6 +31,14 @@ class CityMapFragment : SupportMapFragment(), OnMapReadyCallback {
         menu.getItem(0).isVisible = false
     }
 
+    fun onCityChanged(coordinates: Coordinates) {
+        val latLng = LatLng(coordinates.lat, coordinates.lon)
+        with(map) {
+            addMarker(MarkerOptions().position(latLng))
+            animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.0f))
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         arguments?.let {

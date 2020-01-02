@@ -32,9 +32,10 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        class="com.google.android.gms.maps.MapFragment"
+        class="me.manulorenzo.mapthecity.city.CityMapFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:tag="CityMapFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintHorizontal_chainStyle="packed"
