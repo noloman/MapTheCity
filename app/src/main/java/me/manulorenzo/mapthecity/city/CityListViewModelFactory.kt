@@ -12,9 +12,9 @@ class CityListViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(CityListViewModel::class.java) -> CityListViewModel(
-                repository
+                repository = repository
             ) as T
-            modelClass.isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(repository) as T
+            modelClass.isAssignableFrom(AboutViewModel::class.java) -> AboutViewModel(repository = repository) as T
             else -> throw IllegalArgumentException("ViewModel Not Found")
         }
     }

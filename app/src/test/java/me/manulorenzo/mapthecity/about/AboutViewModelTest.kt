@@ -9,6 +9,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import me.manulorenzo.mapthecity.CoroutinesTestRule
 import me.manulorenzo.mapthecity.data.Resource
@@ -39,7 +40,10 @@ class AboutViewModelTest {
         val repositoryMock: Repository = mock()
 
         val sut =
-            AboutViewModel(repositoryMock)
+            AboutViewModel(
+                coroutinesIoDispatcher = TestCoroutineDispatcher(),
+                repository = repositoryMock
+            )
         doAnswer { fakeSuccessResource }.whenever(repositoryMock).getAbout()
 
         sut.aboutInfo.observeForever(observer)
@@ -59,7 +63,10 @@ class AboutViewModelTest {
         val repositoryMock: Repository = mock()
 
         val sut =
-            AboutViewModel(repositoryMock)
+            AboutViewModel(
+                coroutinesIoDispatcher = TestCoroutineDispatcher(),
+                repository = repositoryMock
+            )
         doAnswer { fakeErrorResource }.whenever(repositoryMock).getAbout()
 
         sut.aboutInfo.observeForever(observer)
