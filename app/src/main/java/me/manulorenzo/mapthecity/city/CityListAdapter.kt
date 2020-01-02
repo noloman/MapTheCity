@@ -59,6 +59,7 @@ class CityListAdapter(
                 parentActivity.supportFragmentManager
                     .beginTransaction()
                     .add(R.id.frameLayout, fragment)
+                    .addToBackStack(null)
                     .commit()
             }
         }
