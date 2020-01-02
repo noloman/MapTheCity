@@ -13,6 +13,10 @@ import java.lang.reflect.Type
 @Mockable
 class RepositoryImpl(private val application: Application) :
     Repository {
+    /**
+     * Ideally the list of cities would be retrieved from a DB for example, and we would sort the cities
+     * alphabetically. Nevertheless here I'm just going to sort them using business logic in the repository, as we don't have a DB.
+     */
     override suspend fun getCities(): Resource<List<City>> =
         try {
             val bufferReader = application.assets.open(CITIES_FILE_NAME).bufferedReader()
@@ -21,7 +25,7 @@ class RepositoryImpl(private val application: Application) :
             }
             val gson = GsonBuilder().create()
             val type: Type = object : TypeToken<ArrayList<City?>?>() {}.type
-            val fromJson = gson.fromJson<List<City>>(data, type)
+            val fromJson: List<City> = gson.fromJson<List<City>>(data, type).sortedBy { it.name }
             Resource.Success(fromJson)
         } catch (e: JsonSyntaxException) {
             Resource.Error(JSONSYNTAXEXCEPTION_ERROR_MESSAGE)

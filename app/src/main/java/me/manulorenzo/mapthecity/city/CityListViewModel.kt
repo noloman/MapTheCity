@@ -15,13 +15,6 @@ class CityListViewModel(private val repository: Repository) : ViewModel() {
     val allCities: LiveData<Resource<List<City>>> =
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
             emit(Resource.Loading())
-            when (val cities = repository.getCities()) {
-                is Resource.Success -> {
-                    cities.data?.let {
-                        emit(Resource.Success(it.sortedBy { city: City -> city.name }))
-                    }
-                }
-                else -> emit(cities)
-            }
+            emit(repository.getCities())
         }
 }
