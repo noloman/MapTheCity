@@ -1,50 +1,75 @@
 package me.manulorenzo.mapthecity.city
 
 import android.view.View
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.city.CityListActivityTest.RecyclerViewAssertions.withRowContaining
+import me.manulorenzo.mapthecity.city.CityListFragmentTest.RecyclerViewAssertions.withRowContaining
 import me.manulorenzo.mapthecity.data.source.FakeCitiesRepository
 import me.manulorenzo.mapthecity.data.source.Repository
 import me.manulorenzo.mapthecity.data.source.ServiceLocator
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import org.junit.Assert.assertNotNull
+import org.junit.Assert
 import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
+@MediumTest
 @RunWith(AndroidJUnit4::class)
-class CityListActivityTest {
+class CityListFragmentTest {
     private lateinit var repository: Repository
     @get:Rule
     var testRule = ActivityTestRule(CityListActivity::class.java, true, false)
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
         repository =
             FakeCitiesRepository()
         ServiceLocator.repository = repository
+    }
+
+    @Test
+    fun givenCityListFragmentLoadedIntoActivity_itShouldGoToAnotherFragmentWhenRowIsClickedOnRecyclerView() {
+        testRule.launchActivity(null)
+
+        assertTrue(testRule.activity.supportFragmentManager.backStackEntryCount == 0)
+        onView(withId(R.id.item_list))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<CityListAdapter.CityViewHolder>(
+                    0,
+                    click()
+                )
+            )
+
+        assertTrue(testRule.activity.supportFragmentManager.backStackEntryCount == 1)
+    }
+
+    @Test
+    fun givenCityListFragment_toolbarShouldBeDisplayed_alongWithSearchIcon() {
+        testRule.launchActivity(null)
+
+        onView(withId(R.id.toolbar)).check(matches(isDisplayed()))
+        onView(withText(R.string.app_name)).check(matches(withParent(withId(R.id.toolbar))))
+        onView(withId(R.id.action_search)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -55,12 +80,12 @@ class CityListActivityTest {
 
     @Test
     fun givenListOfCities_andCertainName_shouldOnlyShowOneCity() {
-        val seville = "Seville"
+        val sevilleCity = "Seville"
         testRule.launchActivity(null)
 
-        performSearch(seville)
+        performSearch(sevilleCity)
 
-        onView(withId(R.id.item_list)).check(withRowContaining(withText(seville)))
+        onView(withId(R.id.item_list)).check(withRowContaining(withText(sevilleCity)))
     }
 
     @Test
@@ -74,7 +99,7 @@ class CityListActivityTest {
 
     private fun performSearch(searchTerm: String) {
         onView(withId(R.id.action_search)).perform(ViewActions.click())
-        onView(withId(R.id.search_src_text)).perform(typeText(searchTerm))
+        onView(withId(R.id.search_src_text)).perform(ViewActions.typeText(searchTerm))
     }
 
     object RecyclerViewAssertions {
@@ -86,12 +111,12 @@ class CityListActivityTest {
          * @return an Espresso ViewAssertion to check against a RecyclerView.
          */
         fun withRowContaining(viewMatcher: Matcher<View>): ViewAssertion? {
-            assertNotNull(viewMatcher)
+            Assert.assertNotNull(viewMatcher)
             return ViewAssertion { view, noViewException ->
                 if (noViewException != null) {
                     throw noViewException
                 }
-                assertTrue(view is RecyclerView)
+                Assert.assertTrue(view is RecyclerView)
                 val recyclerView = view as RecyclerView
                 val adapter = recyclerView.adapter
                 for (position in 0 until adapter!!.itemCount) {
@@ -100,7 +125,7 @@ class CityListActivityTest {
                         adapter.createViewHolder(recyclerView, itemType)
                     adapter.bindViewHolder(viewHolder, position)
                     if (viewHolderMatcher(
-                            hasDescendant(
+                            ViewMatchers.hasDescendant(
                                 viewMatcher
                             )
                         ).matches(viewHolder)
@@ -108,7 +133,7 @@ class CityListActivityTest {
                         return@ViewAssertion  // Found a matching row
                     }
                 }
-                fail("No match found")
+                Assert.fail("No match found")
             }
         }
 
@@ -117,10 +142,10 @@ class CityListActivityTest {
                 if (noViewException != null) {
                     throw noViewException
                 }
-                assertTrue(view is RecyclerView)
+                Assert.assertTrue(view is RecyclerView)
                 val recyclerView = view as RecyclerView
                 val adapter = recyclerView.adapter
-                assertTrue(adapter?.itemCount == size)
+                Assert.assertTrue(adapter?.itemCount == size)
             }
         }
 
