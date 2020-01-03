@@ -3,7 +3,7 @@ package me.manulorenzo.mapthecity.city
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_city_list_layout.landscapeLayout
+import kotlinx.android.synthetic.main.activity_city_list.landscapeLayout
 import kotlinx.android.synthetic.main.activity_item_list.toolbar
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.city.data.Coordinates
@@ -31,9 +31,10 @@ class CityListActivity : AppCompatActivity() {
         // TODO Fix the problem with the home up button
         supportFragmentManager.addOnBackStackChangedListener {
             if (supportFragmentManager.backStackEntryCount > 0) {
-                supportActionBar?.setDisplayShowHomeEnabled(true)
+                supportActionBar?.setDisplayHomeAsUpEnabled(true) // show back button
+                toolbar.setNavigationOnClickListener { onBackPressed() }
             } else {
-                supportActionBar?.setDisplayShowHomeEnabled(false)
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }
         }
     }

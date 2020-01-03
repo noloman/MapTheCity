@@ -8,10 +8,10 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.city_list_row.view.aboutButton
-import kotlinx.android.synthetic.main.city_list_row.view.cityNameTextView
-import kotlinx.android.synthetic.main.city_list_row.view.coordinatesTextView
-import kotlinx.android.synthetic.main.city_list_row.view.countryCodeTextView
+import kotlinx.android.synthetic.main.city_item_row.view.aboutButton
+import kotlinx.android.synthetic.main.city_item_row.view.cityNameTextView
+import kotlinx.android.synthetic.main.city_item_row.view.coordinatesTextView
+import kotlinx.android.synthetic.main.city_item_row.view.countryCodeTextView
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.city.data.City
 import java.util.Locale
@@ -26,7 +26,7 @@ class CityListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.city_list_row, parent, false)
+            .inflate(R.layout.city_item_row, parent, false)
         return CityViewHolder(view)
     }
 

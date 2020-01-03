@@ -1,6 +1,7 @@
 package me.manulorenzo.mapthecity.city
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewAssertion
@@ -24,6 +25,7 @@ import me.manulorenzo.mapthecity.data.source.Repository
 import me.manulorenzo.mapthecity.data.source.ServiceLocator
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Assert
 import org.junit.Assert.assertTrue
@@ -64,12 +66,20 @@ class CityListFragmentTest {
     }
 
     @Test
-    fun givenCityListFragment_toolbarShouldBeDisplayed_alongWithSearchIcon() {
+    fun givenCityListFragment_toolbarShouldBeDisplayed_alongWithSearchIconButNoUpButton() {
         testRule.launchActivity(null)
 
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()))
         onView(withText(R.string.app_name)).check(matches(withParent(withId(R.id.toolbar))))
         onView(withId(R.id.action_search)).check(matches(isDisplayed()))
+        // The navigate up button should NOT be displayed as a child of the toolbar
+        onView(Matchers.anyOf(Matchers.instanceOf(AppCompatImageButton::class.java))).check(
+            matches(
+                Matchers.not(
+                    withParent(withId(R.id.toolbar))
+                )
+            )
+        )
     }
 
     @Test
@@ -98,7 +108,7 @@ class CityListFragmentTest {
     }
 
     private fun performSearch(searchTerm: String) {
-        onView(withId(R.id.action_search)).perform(ViewActions.click())
+        onView(withId(R.id.action_search)).perform(click())
         onView(withId(R.id.search_src_text)).perform(ViewActions.typeText(searchTerm))
     }
 
@@ -116,7 +126,7 @@ class CityListFragmentTest {
                 if (noViewException != null) {
                     throw noViewException
                 }
-                Assert.assertTrue(view is RecyclerView)
+                assertTrue(view is RecyclerView)
                 val recyclerView = view as RecyclerView
                 val adapter = recyclerView.adapter
                 for (position in 0 until adapter!!.itemCount) {
@@ -142,10 +152,10 @@ class CityListFragmentTest {
                 if (noViewException != null) {
                     throw noViewException
                 }
-                Assert.assertTrue(view is RecyclerView)
+                assertTrue(view is RecyclerView)
                 val recyclerView = view as RecyclerView
                 val adapter = recyclerView.adapter
-                Assert.assertTrue(adapter?.itemCount == size)
+                assertTrue(adapter?.itemCount == size)
             }
         }
 

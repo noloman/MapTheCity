@@ -27,5 +27,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context="me.manulorenzo.mapthecity.city.CityListActivity"
-        tools:listitem="@layout/city_list_row" />
+        tools:listitem="@layout/city_item_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

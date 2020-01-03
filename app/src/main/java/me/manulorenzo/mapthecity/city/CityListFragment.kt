@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_city_list_layout.citiesProgressBar
-import kotlinx.android.synthetic.main.fragment_city_list_layout.item_list
+import kotlinx.android.synthetic.main.fragment_city_list.citiesProgressBar
+import kotlinx.android.synthetic.main.fragment_city_list.item_list
 import me.manulorenzo.mapthecity.MapTheCityApplication
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.about.AboutActivity
@@ -28,13 +28,11 @@ class CityListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_city_list_layout, container, false)
+        return inflater.inflate(R.layout.fragment_city_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as CityListActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        (activity as CityListActivity).supportActionBar?.setDisplayShowHomeEnabled(false)
         val citiesListViewModel =
             CityListViewModelFactory((this.activity?.application as MapTheCityApplication).repository)
                 .create(

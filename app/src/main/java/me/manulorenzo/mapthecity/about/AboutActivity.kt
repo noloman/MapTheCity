@@ -21,7 +21,7 @@ class AboutActivity : AppCompatActivity() {
     private val infoContainer: android.view.View? by lazy { findViewById<android.view.View?>(R.id.infoContainer) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_about)
         val aboutViewModel =
             CityListViewModelFactory((this.application as MapTheCityApplication).repository)
                 .create(

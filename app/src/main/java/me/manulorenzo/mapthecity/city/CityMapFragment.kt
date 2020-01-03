@@ -2,6 +2,7 @@ package me.manulorenzo.mapthecity.city
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,9 +27,9 @@ class CityMapFragment : SupportMapFragment(), OnMapReadyCallback {
         getMapAsync(this)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.getItem(0).isVisible = false
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     fun onCityChanged(coordinates: Coordinates) {
