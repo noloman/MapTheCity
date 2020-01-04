@@ -3,14 +3,17 @@ package me.manulorenzo.mapthecity
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers
+import org.hamcrest.Matchers.anyOf
+import org.hamcrest.Matchers.instanceOf
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Assert
 
@@ -19,22 +22,27 @@ object CustomAssertions {
      * Method to assert that the navigate up button exists.
      */
     fun toolbarUpButtonExists(): Boolean = try {
-        Espresso.onView(Matchers.anyOf(Matchers.instanceOf(AppCompatImageButton::class.java)))
-            .check(
-                ViewAssertions.matches(
-                    ViewMatchers.withParent(ViewMatchers.withId(R.id.toolbar))
+        onView(anyOf(instanceOf(AppCompatImageButton::class.java))).check(
+            matches(
+                withParent(
+                    withId(
+                        R.id.toolbar
+                    )
                 )
             )
+        )
         true
     } catch (e: NoMatchingViewException) {
         false
     }
 
     fun actionSearchIconExists(): Boolean = try {
-        Espresso.onView(ViewMatchers.withId(R.id.action_search)).check(
-            ViewAssertions.matches(
-                ViewMatchers.withParent(
-                    ViewMatchers.withId(R.id.toolbar)
+        onView(anyOf(instanceOf(AppCompatImageButton::class.java))).check(
+            matches(
+                withParent(
+                    withId(
+                        R.id.toolbar
+                    )
                 )
             )
         )
