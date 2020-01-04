@@ -1,7 +1,6 @@
 package me.manulorenzo.mapthecity.city
 
 import android.os.Bundle
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -11,12 +10,11 @@ import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import me.manulorenzo.mapthecity.CustomAssertions.toolbarUpButtonExists
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.data.source.FakeCitiesRepository
 import me.manulorenzo.mapthecity.data.source.Repository
 import me.manulorenzo.mapthecity.data.source.ServiceLocator
-import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.instanceOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -64,12 +62,6 @@ class CityMapFragmentTest {
             )
         )
         // The navigate up button should be displayed as a child of the toolbar
-        onView(allOf(instanceOf(AppCompatImageButton::class.java))).check(
-            matches(
-                ViewMatchers.withParent(
-                    withId(R.id.toolbar)
-                )
-            )
-        )
+        toolbarUpButtonExists()
     }
 }
