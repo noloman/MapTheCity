@@ -1,6 +1,5 @@
 package me.manulorenzo.mapthecity.city
 
-import android.os.Bundle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -26,7 +25,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class CityMapFragmentTest {
+class CityMapFragmentLandscapeTest {
     private lateinit var repository: Repository
     private lateinit var device: UiDevice
     @get:Rule
@@ -39,25 +38,12 @@ class CityMapFragmentTest {
         ServiceLocator.repository = repository
         device =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        device.setOrientationNatural()
+        device.setOrientationLeft()
     }
 
     @Test
-    fun givenCityMapFragment_toolbarAndItsDescendantsShouldBeDisplayed() = runBlockingTest {
-        val firstCity = repository.getCities().data?.get(0)
-        val fragment = CityMapFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(CityMapFragment.CITY_COORDINATES_KEY, firstCity?.coordinates)
-            }
-        }
-
+    fun givenLandscapeActivity_toolbarAndItsDescendantsShouldBeDisplayed() = runBlockingTest {
         testRule.launchActivity(null)
-        testRule.activity.supportFragmentManager
-            .beginTransaction()
-            .add(R.id.frameLayout, fragment)
-            .addToBackStack(null)
-            .commit()
-
         // The toolbar should be displayed
         onView(withId(R.id.toolbar)).check(matches(ViewMatchers.isDisplayed()))
         // The toolbar should have a title

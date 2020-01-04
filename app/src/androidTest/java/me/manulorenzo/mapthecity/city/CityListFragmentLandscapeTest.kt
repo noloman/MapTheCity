@@ -4,7 +4,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
@@ -23,7 +22,6 @@ import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.data.source.FakeCitiesRepository
 import me.manulorenzo.mapthecity.data.source.Repository
 import me.manulorenzo.mapthecity.data.source.ServiceLocator
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +30,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class CityListFragmentTest {
+class CityListFragmentLandscapeTest {
     private lateinit var repository: Repository
     private lateinit var device: UiDevice
     @get:Rule
@@ -45,28 +43,13 @@ class CityListFragmentTest {
         ServiceLocator.repository = repository
         device =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        device.setOrientationNatural()
-    }
-
-    @Test
-    fun givenCityListFragmentLoadedIntoActivity_itShouldGoToAnotherFragmentWhenRowIsClickedOnRecyclerView() {
-        testRule.launchActivity(null)
-
-        assertTrue(testRule.activity.supportFragmentManager.backStackEntryCount == 0)
-        onView(withId(R.id.citiesRecyclerView))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<CityListAdapter.CityViewHolder>(
-                    0,
-                    click()
-                )
-            )
-
-        assertTrue(testRule.activity.supportFragmentManager.backStackEntryCount == 1)
+        device.setOrientationLeft()
     }
 
     @Test
     fun givenCityListFragment_toolbarShouldBeDisplayed_alongWithSearchIconButNoUpButton() {
         testRule.launchActivity(null)
+
 
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()))
         onView(withText(R.string.app_name)).check(matches(withParent(withId(R.id.toolbar))))
@@ -79,6 +62,7 @@ class CityListFragmentTest {
     @Test
     fun givenListOfCities_shouldHaveTheRecyclerViewVisible() {
         testRule.launchActivity(null)
+
         onView(withId(R.id.citiesRecyclerView)).check(matches(isDisplayed()))
     }
 
