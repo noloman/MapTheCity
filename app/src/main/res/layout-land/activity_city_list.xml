@@ -5,11 +5,8 @@
     android:id="@+id/landscapeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
-    android:orientation="horizontal"
     android:showDividers="middle"
     tools:context=".city.CityListActivity">
 
@@ -18,26 +15,31 @@
     master/detail flow.
     
     -->
+    <include layout="@layout/custom_appbar_layout" />
 
     <fragment
         android:id="@+id/cityListFragment"
         class="me.manulorenzo.mapthecity.city.CityListFragment"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mapFragment"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
 
     <fragment
         android:id="@+id/mapFragment"
         class="me.manulorenzo.mapthecity.city.CityMapFragment"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:tag="CityMapFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/cityListFragment" />
+        app:layout_constraintStart_toEndOf="@+id/cityListFragment"
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

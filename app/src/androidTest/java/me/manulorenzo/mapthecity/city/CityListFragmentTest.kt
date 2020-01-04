@@ -13,6 +13,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import me.manulorenzo.mapthecity.CustomAssertions.actionSearchIconExists
 import me.manulorenzo.mapthecity.CustomAssertions.toolbarUpButtonExists
 import me.manulorenzo.mapthecity.CustomAssertions.withRecyclerViewOfSize
 import me.manulorenzo.mapthecity.CustomAssertions.withRowContaining
@@ -46,7 +47,7 @@ class CityListFragmentTest {
         testRule.launchActivity(null)
 
         assertTrue(testRule.activity.supportFragmentManager.backStackEntryCount == 0)
-        onView(withId(R.id.item_list))
+        onView(withId(R.id.citiesRecyclerView))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<CityListAdapter.CityViewHolder>(
                     0,
@@ -63,7 +64,8 @@ class CityListFragmentTest {
 
         onView(withId(R.id.toolbar)).check(matches(isDisplayed()))
         onView(withText(R.string.app_name)).check(matches(withParent(withId(R.id.toolbar))))
-        onView(withId(R.id.action_search)).check(matches(isDisplayed()))
+        // Search icon should exist
+        actionSearchIconExists()
         // The navigate up button should NOT be displayed as a child of the toolbar
         !toolbarUpButtonExists()
     }
@@ -71,7 +73,7 @@ class CityListFragmentTest {
     @Test
     fun givenListOfCities_shouldHaveTheRecyclerViewVisible() {
         testRule.launchActivity(null)
-        onView(withId(R.id.item_list)).check(matches(isDisplayed()))
+        onView(withId(R.id.citiesRecyclerView)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -81,7 +83,7 @@ class CityListFragmentTest {
 
         performSearch(sevilleCity)
 
-        onView(withId(R.id.item_list)).check(withRowContaining(withText(sevilleCity)))
+        onView(withId(R.id.citiesRecyclerView)).check(withRowContaining(withText(sevilleCity)))
     }
 
     @Test
@@ -90,7 +92,7 @@ class CityListFragmentTest {
 
         performSearch("dasfdasdf")
 
-        onView(withId(R.id.item_list)).check(withRecyclerViewOfSize(0))
+        onView(withId(R.id.citiesRecyclerView)).check(withRecyclerViewOfSize(0))
     }
 
     private fun performSearch(searchTerm: String) {

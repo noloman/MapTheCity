@@ -10,6 +10,7 @@ import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import me.manulorenzo.mapthecity.CustomAssertions.actionSearchIconExists
 import me.manulorenzo.mapthecity.CustomAssertions.toolbarUpButtonExists
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.data.source.FakeCitiesRepository
@@ -61,6 +62,8 @@ class CityMapFragmentTest {
                 )
             )
         )
+        // Search icon should not exist
+        !actionSearchIconExists()
         // The navigate up button should be displayed as a child of the toolbar
         toolbarUpButtonExists()
     }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".city.CityListActivity">
 
     <ProgressBar
         android:id="@+id/citiesProgressBar"
@@ -15,8 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_list"
-        android:name="mapthecity"
+        android:id="@+id/citiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutAnimation="@anim/cities_animation_appear_from_bottom"
@@ -26,6 +26,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context="me.manulorenzo.mapthecity.city.CityListActivity"
         tools:listitem="@layout/city_item_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,19 @@ object CustomAssertions {
         false
     }
 
+    fun actionSearchIconExists(): Boolean = try {
+        Espresso.onView(ViewMatchers.withId(R.id.action_search)).check(
+            ViewAssertions.matches(
+                ViewMatchers.withParent(
+                    ViewMatchers.withId(R.id.toolbar)
+                )
+            )
+        )
+        true
+    } catch (e: NoMatchingViewException) {
+        false
+    }
+
     /**
      * Provides a RecyclerView assertion based on a view matcher. This allows you to
      * validate whether a RecyclerView contains a row in memory without scrolling the list.

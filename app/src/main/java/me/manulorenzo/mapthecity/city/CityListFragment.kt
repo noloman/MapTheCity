@@ -13,7 +13,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_city_list.citiesProgressBar
-import kotlinx.android.synthetic.main.fragment_city_list.item_list
+import kotlinx.android.synthetic.main.fragment_city_list.citiesRecyclerView
 import me.manulorenzo.mapthecity.MapTheCityApplication
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.about.AboutActivity
@@ -42,11 +42,11 @@ class CityListFragment : Fragment() {
             when (cityList) {
                 is Resource.Loading -> {
                     citiesProgressBar.visibility = View.VISIBLE
-                    item_list.visibility = View.GONE
+                    citiesRecyclerView.visibility = View.GONE
                 }
                 is Resource.Success -> {
                     citiesProgressBar.visibility = View.GONE
-                    item_list.visibility = View.VISIBLE
+                    citiesRecyclerView.visibility = View.VISIBLE
                     if (cityList.data != null) {
                         adapter = CityListAdapter(
                             this.activity as CityListActivity,
@@ -54,7 +54,7 @@ class CityListFragment : Fragment() {
                             cityRowClickedListener,
                             aboutButtonClickedListener
                         )
-                        item_list.adapter = adapter
+                        citiesRecyclerView.adapter = adapter
                     }
                 }
             }
@@ -80,8 +80,6 @@ class CityListFragment : Fragment() {
             searchManager
                 .getSearchableInfo(activity?.componentName)
         )
-        searchView.maxWidth = Int.MAX_VALUE
-
         // listening to search query text change
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean { // filter recycler view when query submitted

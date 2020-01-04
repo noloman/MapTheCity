@@ -1,8 +1,6 @@
 package me.manulorenzo.mapthecity.city
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,17 +17,12 @@ class CityMapFragment : SupportMapFragment(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(false)
         (activity as CityListActivity).supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setDefaultDisplayHomeAsUpEnabled(true)
         }
         getMapAsync(this)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.getItem(0).isVisible = false
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     fun onCityChanged(coordinates: Coordinates) {
