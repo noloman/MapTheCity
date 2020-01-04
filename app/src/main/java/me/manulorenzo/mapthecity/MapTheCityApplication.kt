@@ -21,7 +21,7 @@ class MapTheCityApplication : Application() {
         StrictMode.setVmPolicy(
             VmPolicy.Builder()
                 .detectAll()
-                .penaltyDeath()
+                .penaltyLog()
                 .build()
         )
     }
