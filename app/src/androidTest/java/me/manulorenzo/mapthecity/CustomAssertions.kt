@@ -19,6 +19,9 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 
+/**
+ * Object containing different assertions for Espresso
+ */
 object CustomAssertions {
     /**
      * Method to assert that the navigate up button exists.
