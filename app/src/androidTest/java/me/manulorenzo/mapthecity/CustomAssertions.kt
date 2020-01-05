@@ -15,7 +15,9 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.anyOf
 import org.hamcrest.Matchers.instanceOf
 import org.hamcrest.TypeSafeMatcher
-import org.junit.Assert
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 
 object CustomAssertions {
     /**
@@ -59,12 +61,12 @@ object CustomAssertions {
      * @return an Espresso ViewAssertion to check against a RecyclerView.
      */
     fun withRowContaining(viewMatcher: Matcher<View>): ViewAssertion? {
-        Assert.assertNotNull(viewMatcher)
+        assertNotNull(viewMatcher)
         return ViewAssertion { view, noViewException ->
             if (noViewException != null) {
                 throw noViewException
             }
-            Assert.assertTrue(view is RecyclerView)
+            assertTrue(view is RecyclerView)
             val recyclerView = view as RecyclerView
             val adapter = recyclerView.adapter
             for (position in 0 until adapter!!.itemCount) {
@@ -81,7 +83,7 @@ object CustomAssertions {
                     return@ViewAssertion  // Found a matching row
                 }
             }
-            Assert.fail("No match found")
+            fail("No match found")
         }
     }
 
@@ -90,10 +92,10 @@ object CustomAssertions {
             if (noViewException != null) {
                 throw noViewException
             }
-            Assert.assertTrue(view is RecyclerView)
+            assertTrue(view is RecyclerView)
             val recyclerView = view as RecyclerView
             val adapter = recyclerView.adapter
-            Assert.assertTrue(adapter?.itemCount == size)
+            assertTrue(adapter?.itemCount == size)
         }
     }
 
@@ -105,9 +107,8 @@ object CustomAssertions {
      */
     private fun viewHolderMatcher(itemViewMatcher: Matcher<View>): Matcher<RecyclerView.ViewHolder> {
         return object : TypeSafeMatcher<RecyclerView.ViewHolder>() {
-            override fun matchesSafely(viewHolder: RecyclerView.ViewHolder?): Boolean {
-                return itemViewMatcher.matches(viewHolder!!.itemView)
-            }
+            override fun matchesSafely(viewHolder: RecyclerView.ViewHolder?): Boolean =
+                itemViewMatcher.matches(viewHolder!!.itemView)
 
             override fun describeTo(description: Description) {
                 description.appendText("holder with view: ")

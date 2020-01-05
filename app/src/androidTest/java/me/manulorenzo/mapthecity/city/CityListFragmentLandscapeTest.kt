@@ -67,13 +67,15 @@ class CityListFragmentLandscapeTest {
     }
 
     @Test
-    fun givenListOfCities_andCertainName_shouldOnlyShowOneCity() {
+    fun givenListOfCities_andCertainName_shouldOnlyShowOneCity_withNameCoordinatesAndAboutButton() {
         val sevilleCity = "Seville"
         testRule.launchActivity(null)
 
         performSearch(sevilleCity)
 
         onView(withId(R.id.citiesRecyclerView)).check(withRowContaining(withText(sevilleCity)))
+        onView(withId(R.id.citiesRecyclerView)).check(withRowContaining(withText("37.38283, -5.97317")))
+        onView(withId(R.id.citiesRecyclerView)).check(withRowContaining(withId(R.id.aboutButton)))
     }
 
     @Test
