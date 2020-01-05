@@ -1,24 +1,22 @@
 package me.manulorenzo.mapthecity.about
 
 import android.os.Bundle
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.activity_about.aboutInfo
+import kotlinx.android.synthetic.main.activity_about.companyAdress
+import kotlinx.android.synthetic.main.activity_about.companyCity
+import kotlinx.android.synthetic.main.activity_about.companyName
+import kotlinx.android.synthetic.main.activity_about.companypostal
+import kotlinx.android.synthetic.main.activity_about.errorView
+import kotlinx.android.synthetic.main.activity_about.infoContainer
+import kotlinx.android.synthetic.main.activity_about.progressBar
 import me.manulorenzo.mapthecity.MapTheCityApplication
 import me.manulorenzo.mapthecity.R
 import me.manulorenzo.mapthecity.city.CityListViewModelFactory
 import me.manulorenzo.mapthecity.data.Resource
 
 class AboutActivity : AppCompatActivity() {
-    private val companyName: TextView? by lazy { findViewById<TextView>(R.id.companyName) }
-    private val companyAddress: TextView? by lazy { findViewById<TextView>(R.id.companyAdress) }
-    private val companyPostal: TextView? by lazy { findViewById<TextView>(R.id.companypostal) }
-    private val companyCity: TextView? by lazy { findViewById<TextView>(R.id.companyCity) }
-    private val aboutInfoTextView: TextView? by lazy { findViewById<TextView>(R.id.aboutInfo) }
-    private val progressBar: ProgressBar? by lazy { findViewById<ProgressBar>(R.id.progressBar) }
-    private val errorView: android.view.View? by lazy { findViewById<android.view.View?>(R.id.errorView) }
-    private val infoContainer: android.view.View? by lazy { findViewById<android.view.View?>(R.id.infoContainer) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
@@ -48,23 +46,23 @@ class AboutActivity : AppCompatActivity() {
 
     private fun setCompanyName(aboutInfo: AboutInfo?) {
         infoContainer?.visibility = android.view.View.VISIBLE
-        this.companyName?.text = aboutInfo?.companyName
+        companyName?.text = aboutInfo?.companyName
     }
 
     private fun setCompanyAddress(aboutInfo: AboutInfo?) {
-        this.companyAddress?.text = aboutInfo?.companyAddress
+        companyAdress.text = aboutInfo?.companyAddress
     }
 
     private fun setCompanyPostalCode(aboutInfo: AboutInfo?) {
-        companyPostal?.text = aboutInfo?.companyPostal
+        companypostal.text = aboutInfo?.companyPostal
     }
 
     private fun setCompanyCity(aboutInfo: AboutInfo?) {
-        this.companyCity?.text = aboutInfo?.companyCity
+        companyCity?.text = aboutInfo?.companyCity
     }
 
     private fun setAboutInfo(aboutInfo: AboutInfo?) {
-        aboutInfoTextView?.text = aboutInfo?.aboutInfo
+        this.aboutInfo.text = aboutInfo?.aboutInfo
     }
 
     private fun showError() {
