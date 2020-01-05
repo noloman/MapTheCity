@@ -14,6 +14,7 @@ Possible improvements:
 - Use a DB framework such as Room.
 - Create a backend service to fetch the list of cities from a server, instead of from the assets folder.
 - Improve (or remote) the `About` button and its functionality.
+- Augment unit test coverage of the app in general.
 
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_list.png)
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_map.png)
