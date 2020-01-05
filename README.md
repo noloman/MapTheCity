@@ -12,6 +12,7 @@ Possible improvements:
 
 - Use DI framework (Dagger 2, Koin) as a replacement for the `ServiceLocator` pattern used.
 - Use a DB framework such as Room.
+- Create a backend service to fetch the list of cities from a server, instead of from the assets folder.
 
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_list.png)
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_map.png)
