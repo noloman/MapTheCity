@@ -15,5 +15,5 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Android Emulator
-      uses: vgaidarji/android-github-actions-emulator@v1.0.1
+    - name: Android Emulator Runner
+      uses: ReactiveCircus/android-emulator-runner@v2.2.0
