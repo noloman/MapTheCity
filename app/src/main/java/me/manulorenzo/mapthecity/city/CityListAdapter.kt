@@ -17,7 +17,6 @@ import me.manulorenzo.mapthecity.city.data.City
 import java.util.Locale
 
 class CityListAdapter(
-    private val parentActivity: CityListActivity,
     private val cityList: List<City>,
     private val onClickListener: View.OnClickListener,
     private val onButtonClickListener: View.OnClickListener

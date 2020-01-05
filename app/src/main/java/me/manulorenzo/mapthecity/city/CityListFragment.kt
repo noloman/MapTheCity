@@ -49,7 +49,6 @@ class CityListFragment : Fragment() {
                     citiesRecyclerView.visibility = View.VISIBLE
                     if (cityList.data != null) {
                         adapter = CityListAdapter(
-                            this.activity as CityListActivity,
                             cityList.data,
                             cityRowClickedListener,
                             aboutButtonClickedListener
