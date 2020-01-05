@@ -4,4 +4,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="about_button_text">About</string>
     <string name="search_title">Search</string>
+    <string name="city_coordinates_placeholder">%s, %s</string>
 </resources>

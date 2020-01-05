@@ -33,9 +33,14 @@ class CityListAdapter(
         val city = filteredCityList[position]
         holderCity.cityName.text = city.name
         holderCity.cityCountryCode.text = city.country
-        // TODO Improve
         holderCity.cityCoordinates.text =
-            city.coordinates.lat.toString() + ", " + city.coordinates.lon
+            String.format(
+                holderCity.cityCoordinates.context.getString(
+                    R.string.city_coordinates_placeholder
+                ),
+                city.coordinates.lat.toString(),
+                city.coordinates.lon.toString()
+            )
         holderCity.aboutButton.setOnClickListener(onButtonClickListener)
         with(holderCity.itemView) {
             tag = city
