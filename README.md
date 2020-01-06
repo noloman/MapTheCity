@@ -16,6 +16,7 @@ Possible improvements:
 - Create a backend service to fetch the list of cities from a server, instead of from the assets folder.
 - Improve (or remote) the `About` button and its functionality.
 - Augment unit test coverage of the app in general.
+- Tackle flaky UI tests, as sometimes some of them pass when run alltogether, and sometimes they don't (specially using the Github Action workflow instrumented tests).
 
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_list.png)
 ![](https://github.com/noloman/MapTheCity/blob/master/art/portrait_map.png)
