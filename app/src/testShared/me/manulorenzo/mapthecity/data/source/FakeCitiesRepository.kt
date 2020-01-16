@@ -1,9 +1,9 @@
 package me.manulorenzo.mapthecity.data.source
 
-import me.manulorenzo.mapthecity.about.AboutInfo
-import me.manulorenzo.mapthecity.city.data.City
-import me.manulorenzo.mapthecity.city.data.Coordinates
 import me.manulorenzo.mapthecity.data.Resource
+import me.manulorenzo.mapthecity.ui.about.AboutInfo
+import me.manulorenzo.mapthecity.ui.city.data.City
+import me.manulorenzo.mapthecity.ui.city.data.Coordinates
 
 class FakeCitiesRepository :
     Repository {

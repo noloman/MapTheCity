@@ -31,7 +31,7 @@
             android:value="${gmapsV2ApiKey}" />
 
         <activity
-            android:name="me.manulorenzo.mapthecity.city.CityListActivity"
+            android:name="me.manulorenzo.mapthecity.ui.city.CityListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="me.manulorenzo.mapthecity.about.AboutActivity" />
+        <activity android:name="me.manulorenzo.mapthecity.ui.about.AboutActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions

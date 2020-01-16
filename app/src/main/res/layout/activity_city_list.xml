@@ -7,7 +7,7 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="middle"
-    tools:context=".city.CityListActivity">
+    tools:context="me.manulorenzo.mapthecity.ui.city.CityListActivity">
 
     <include layout="@layout/custom_appbar_layout" />
 

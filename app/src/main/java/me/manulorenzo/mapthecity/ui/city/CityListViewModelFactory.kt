@@ -1,9 +1,9 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import me.manulorenzo.mapthecity.about.AboutViewModel
 import me.manulorenzo.mapthecity.data.source.Repository
+import me.manulorenzo.mapthecity.ui.about.AboutViewModel
 
 @Suppress("UNCHECKED_CAST")
 class CityListViewModelFactory(

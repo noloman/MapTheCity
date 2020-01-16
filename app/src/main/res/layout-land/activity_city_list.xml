@@ -8,7 +8,7 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="middle"
-    tools:context=".city.CityListActivity">
+    tools:context="me.manulorenzo.mapthecity.ui.city.CityListActivity">
 
     <!--
     This layout is a two-pane layout for the Items
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/cityListFragment"
-        class="me.manulorenzo.mapthecity.city.CityListFragment"
+        class="me.manulorenzo.mapthecity.ui.city.CityListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        class="me.manulorenzo.mapthecity.city.CityMapFragment"
+        class="me.manulorenzo.mapthecity.ui.city.CityMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:tag="CityMapFragment"

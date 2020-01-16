@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.about
+package me.manulorenzo.mapthecity.ui.about
 
 /**
  * Created by Backbase R&D B.V on 28/06/2018.

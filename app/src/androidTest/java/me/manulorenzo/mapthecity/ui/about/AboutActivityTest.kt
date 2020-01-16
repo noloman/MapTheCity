@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.about
+package me.manulorenzo.mapthecity.ui.about
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.Espresso.onView

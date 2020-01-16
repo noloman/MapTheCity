@@ -1,5 +1,6 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
+import android.os.Bundle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -25,7 +26,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @MediumTest
 @RunWith(AndroidJUnit4::class)
-class CityMapFragmentLandscapeTest {
+class CityMapFragmentTest {
     private lateinit var repository: Repository
     private lateinit var device: UiDevice
     @get:Rule
@@ -38,12 +39,25 @@ class CityMapFragmentLandscapeTest {
         ServiceLocator.repository = repository
         device =
             UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-        device.setOrientationLeft()
+        device.setOrientationNatural()
     }
 
     @Test
-    fun givenLandscapeActivity_toolbarAndItsDescendantsShouldBeDisplayed() = runBlockingTest {
+    fun givenCityMapFragment_toolbarAndItsDescendantsShouldBeDisplayed() = runBlockingTest {
+        val firstCity = repository.getCities().data?.get(0)
+        val fragment = CityMapFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(CityMapFragment.CITY_COORDINATES_KEY, firstCity?.coordinates)
+            }
+        }
+
         testRule.launchActivity(null)
+        testRule.activity.supportFragmentManager
+            .beginTransaction()
+            .add(R.id.frameLayout, fragment)
+            .addToBackStack(null)
+            .commit()
+
         // The toolbar should be displayed
         onView(withId(R.id.toolbar)).check(matches(ViewMatchers.isDisplayed()))
         // The toolbar should have a title

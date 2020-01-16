@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import android.os.Bundle
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -7,7 +7,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import me.manulorenzo.mapthecity.city.data.Coordinates
+import me.manulorenzo.mapthecity.ui.city.data.Coordinates
 
 class CityMapFragment : SupportMapFragment(), OnMapReadyCallback {
     companion object {

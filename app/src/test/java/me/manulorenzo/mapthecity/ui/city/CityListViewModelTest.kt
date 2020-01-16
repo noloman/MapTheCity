@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -12,10 +12,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import me.manulorenzo.mapthecity.CoroutinesTestRule
-import me.manulorenzo.mapthecity.city.data.City
-import me.manulorenzo.mapthecity.city.data.Coordinates
 import me.manulorenzo.mapthecity.data.Resource
 import me.manulorenzo.mapthecity.data.source.Repository
+import me.manulorenzo.mapthecity.ui.city.data.City
+import me.manulorenzo.mapthecity.ui.city.data.Coordinates
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test

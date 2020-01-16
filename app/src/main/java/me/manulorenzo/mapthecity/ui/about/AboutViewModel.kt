@@ -1,24 +1,22 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.about
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import me.manulorenzo.mapthecity.city.data.City
 import me.manulorenzo.mapthecity.data.Resource
 import me.manulorenzo.mapthecity.data.source.Repository
 
-class CityListViewModel(
+class AboutViewModel(
     coroutinesIoDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val repository: Repository
 ) : ViewModel() {
-    @VisibleForTesting
-    val allCities: LiveData<Resource<List<City>>> =
+    val aboutInfo: LiveData<Resource<AboutInfo>> =
         liveData(context = viewModelScope.coroutineContext + coroutinesIoDispatcher) {
             emit(Resource.Loading())
-            emit(repository.getCities())
+            val info = repository.getAbout()
+            emit(info)
         }
 }

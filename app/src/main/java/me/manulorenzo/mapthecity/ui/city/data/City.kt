@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city.data
+package me.manulorenzo.mapthecity.ui.city.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

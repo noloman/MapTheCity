@@ -10,8 +10,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import me.manulorenzo.mapthecity.city.data.City
 import me.manulorenzo.mapthecity.data.Resource
+import me.manulorenzo.mapthecity.ui.city.data.City
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before

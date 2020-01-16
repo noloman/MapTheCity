@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.about
+package me.manulorenzo.mapthecity.ui.about
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.activity_about.infoContainer
 import kotlinx.android.synthetic.main.activity_about.progressBar
 import me.manulorenzo.mapthecity.MapTheCityApplication
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.city.CityListViewModelFactory
 import me.manulorenzo.mapthecity.data.Resource
+import me.manulorenzo.mapthecity.ui.city.CityListViewModelFactory
 
 class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

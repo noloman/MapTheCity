@@ -4,9 +4,9 @@ import android.app.Application
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
-import me.manulorenzo.mapthecity.about.AboutInfo
-import me.manulorenzo.mapthecity.city.data.City
 import me.manulorenzo.mapthecity.data.Resource
+import me.manulorenzo.mapthecity.ui.about.AboutInfo
+import me.manulorenzo.mapthecity.ui.city.data.City
 import java.io.IOException
 import java.lang.reflect.Type
 

@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.city_item_row.view.cityNameTextView
 import kotlinx.android.synthetic.main.city_item_row.view.coordinatesTextView
 import kotlinx.android.synthetic.main.city_item_row.view.countryCodeTextView
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.city.data.City
+import me.manulorenzo.mapthecity.ui.city.data.City
 import java.util.Locale
 
 class CityListAdapter(

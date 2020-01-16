@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_city_list.landscapeLayout
 import kotlinx.android.synthetic.main.custom_appbar_layout.toolbar
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.city.data.Coordinates
+import me.manulorenzo.mapthecity.ui.city.data.Coordinates
 
 class CityListActivity : AppCompatActivity() {
     /**

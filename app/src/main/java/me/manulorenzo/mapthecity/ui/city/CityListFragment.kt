@@ -1,4 +1,4 @@
-package me.manulorenzo.mapthecity.city
+package me.manulorenzo.mapthecity.ui.city
 
 import android.app.SearchManager
 import android.content.Context
@@ -16,9 +16,9 @@ import kotlinx.android.synthetic.main.fragment_city_list.citiesProgressBar
 import kotlinx.android.synthetic.main.fragment_city_list.citiesRecyclerView
 import me.manulorenzo.mapthecity.MapTheCityApplication
 import me.manulorenzo.mapthecity.R
-import me.manulorenzo.mapthecity.about.AboutActivity
-import me.manulorenzo.mapthecity.city.data.City
 import me.manulorenzo.mapthecity.data.Resource
+import me.manulorenzo.mapthecity.ui.about.AboutActivity
+import me.manulorenzo.mapthecity.ui.city.data.City
 
 class CityListFragment : Fragment() {
     lateinit var adapter: CityListAdapter
