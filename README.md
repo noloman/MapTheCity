@@ -8,13 +8,13 @@ The app has been tested on:
 - Google Pixel 3 XL API 29
 - Google Nexus 9 API 25
 
-Possible improvements:
+## Possible improvements:
 
 - Use DI framework (Dagger 2, Koin) as a replacement for the `ServiceLocator` pattern used.
 - Use a DB framework such as Room.
 - Create data sources for the repository for a better separation of concerns, as recommended in [Google's Guide to app architecture](https://developer.android.com/jetpack/docs/guide#recommended-app-arch).
 - Create a backend service to fetch the list of cities from a server, instead of from the assets folder.
-- Improve (or remote) the `About` button and its functionality.
+- Improve (or remove) the `About` button and its functionality.
 - Augment unit test coverage of the app in general.
 - Tackle flaky UI tests, as sometimes some of them pass when run alltogether, and sometimes they don't (specially using the Github Action workflow instrumented tests).
 
